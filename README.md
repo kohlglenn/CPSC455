@@ -8,11 +8,11 @@ A crowdsourced (friendsourced) restaurant finder: Put a group of friends in a lo
 
 **Who is it for?**: Friends who want to go out to eat but do not know where.  
 
-**What will it do?**: Display restaurants based on prozimity to the users and collect their preferences for said restaurants.  
+**What will it do?**: Display restaurants based on proximity to the users and collect their preferences for said restaurants.  
 
 **What type of data will it store?**:  
 * Account system for logging in
-* For each account will save some statistics (logins, restaurants swiped, blacklisted restaurants)
+* For each account will save some statistics (logins, restaurants voted yes/no, blacklisted restaurants)
 * For each group/lobby will save some statistics (previously visited restaurants)  
 
 **What will users be able to do with this data?**:  
