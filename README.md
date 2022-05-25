@@ -1,2 +1,11 @@
-# CPSC455
-A repo for our CPSC455 project
+# Insert Cool Website Name
+
+Team PHP: Hilarious Programmers
+
+## Project Description
+
+## Project Task Requirements
+
+### Detailed Task Breakdown
+
+## Protoypes
