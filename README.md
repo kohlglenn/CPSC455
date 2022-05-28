@@ -72,3 +72,4 @@ A crowdsourced (friendsourced) restaurant finder: Put a group of friends in a lo
 * Filter restaurants by user parameters, i.e. type of food, cost
 
 ## Protoypes
+https://www.figma.com/file/L96PowD3EXPwk3o4PLkf5y/Untitled?node-id=2%3A18
