@@ -1,0 +1,24 @@
+{
+  "name": "cpsc455",
+  "version": "1.0.0",
+  "description": "front-end and back-end for our cs 455 project",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "client": "npm --prefix front-end run start",
+    "server": "npm --prefix back-end run start",
+    "dev": "concurrently \"npm run client\" \"npm run server\""
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kohlglenn/CPSC455.git"
+  },
+  "author": "Allen, Ivan, Kohl, Shawn",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/kohlglenn/CPSC455/issues"
+  },
+  "homepage": "https://github.com/kohlglenn/CPSC455#readme",
+  "dependencies": {
+    "concurrently": "^7.2.1"
+  }
+}
