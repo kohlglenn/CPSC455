@@ -26,5 +26,32 @@ A crowdsourced (friendsourced) restaurant finder: Put a group of friends in a lo
 ## Project Task Requirements
 
 ### Detailed Task Breakdown
+#### Front End Task Breakdown
+##### Important HTML pages:
+###### Lobby Pages
+* Create/Settings page
+* Results page
+###### Individual User Pages:
+* Individual selectors
+* Enter lobby page
+* Account info pages
+* Restaurant info pages
+
+##### General page styling
+* One css file to keep design consistent across pages
+* Styling file for each page for page-specific elements 
+    * May be combined with the general page css with unique ids? May create unnecessarily complex DOM
+
+##### Javascript file - functions as necesary
+
+#### Backend Task Breakdown
+##### Google Maps API
+* Establish link with Google Maps API 
+    * config files
+    * Google API key
+* Find all restaurants in specified radius from input location
+* Get all data related to restaurants
+    * Storing restaurant as object for future reference, i.e. restaurant preferences
+* Filter restaurants by user parameters, i.e. type of food, cost
 
 ## Protoypes
