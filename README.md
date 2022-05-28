@@ -24,6 +24,23 @@ A crowdsourced (friendsourced) restaurant finder: Put a group of friends in a lo
 * Group and individual statistics seem to be the easiest to remove as it doesn't impact the MVP much.  
 
 ## Project Task Requirements
+**Minimal Requirements**: 
+* Basic front end design of lobby and restaurant display 
+* Data storage of user accounts
+* Decision making algorithm which returns a recommendation based on user preferences
+* Using Google Maps Restaurant API to display nearby restaurants
+
+**Standard Requirements**:
+* Data storage of lobbies and user preferences
+* Matching preferences with restaurant types to provide recommendations
+* Features based on user preferences, e.g. blacklist restaurants, always display certain restaurants 
+* Allow users to log their experience/review and track it in a lobby
+* Develop the front end more to make the page look seamless and visually appealing
+
+**Stretch Requirements**:
+* Personalized chart representing a user's restaurant type preferences based on their swipe history 
+* Create different types of decision-making algorithms that the user can choose between, e.g. randomized
+* Cookie system that allows anyone to form/join a temporary lobby without having to make an account 
 
 ### Detailed Task Breakdown
 #### Front End Task Breakdown
