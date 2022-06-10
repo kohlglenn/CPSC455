@@ -1,0 +1,36 @@
+.lobby-creation-page {
+    display: block;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin-right: -50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+}
+
+.lobby-creation-question {
+    font-size: 25px;
+    font-weight: 600;
+}
+
+.lobby-creation-button-container {
+    display: flex;
+    justify-content: center;
+}
+
+.lobby-creation-button {
+    display: flex;
+    flex-direction: column;
+    padding: 10px 0px 10px 0px;
+    margin: 10px 0px 10px 0px;
+    width: 40%;
+    cursor: pointer;
+}
+
+.lobby-creation-button:hover {
+    background: rgb(214, 209, 209);
+}
+
+.lobby-creation-icon {
+    padding: 10px;
+}

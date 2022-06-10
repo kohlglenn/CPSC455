@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
 import LayoutWithAppbar from '../layout/LayoutWithAppbar';
+import LobbyCreation from './LobbyCreation'
 
 import {useDispatch, useSelector} from 'react-redux';
 import { ReduxState } from '../../reducers';
@@ -31,9 +32,10 @@ function Landing() {
   }, []);
 
   return (
-    <LayoutWithAppbar>
-        Landing
-    </LayoutWithAppbar>
+    // <LayoutWithAppbar>
+    //     Landing
+        <LobbyCreation></LobbyCreation>
+    // </LayoutWithAppbar>
   );
 }
 
