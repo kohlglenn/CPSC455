@@ -32,10 +32,10 @@ function Landing() {
   }, []);
 
   return (
-    // <LayoutWithAppbar>
-    //     Landing
-        <LobbyCreation></LobbyCreation>
-    // </LayoutWithAppbar>
+    <LayoutWithAppbar>
+        Landing
+        {/* <LobbyCreation></LobbyCreation> */}
+    </LayoutWithAppbar>
   );
 }
 
