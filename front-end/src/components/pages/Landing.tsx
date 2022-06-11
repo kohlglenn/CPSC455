@@ -33,13 +33,9 @@ function Landing() {
   }, []);
 
   return (
-    // <LayoutWithAppbar>
-    //     Landing
-    //     {/* <LobbyCreation></LobbyCreation> */}
-       
-    // </LayoutWithAppbar>
-    <LobbySelection></LobbySelection>
-
+    <LayoutWithAppbar>
+        Landing
+    </LayoutWithAppbar>
   );
 }
 
