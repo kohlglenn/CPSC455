@@ -1,0 +1,45 @@
+
+.landing-page{
+    min-width:1100px;
+}
+
+.landing-title {
+    font-size: 3rem;
+    text-align: center;
+}
+
+
+.landing-content{
+    display: block;
+    position: fixed;
+    top: 20%;
+    left: 5%;
+    text-align: left;
+
+}
+
+
+button{
+	cursor: pointer;
+	background: #e7e7e7;
+	border: none;
+	padding: 1.5rem 3rem;
+	font-family: inherit;
+	font-size: inherit;
+	position: relative;
+	display: inline-block;
+    margin-bottom: 1.5rem;
+}
+
+.landing-buttons {
+    text-align: center;
+}
+
+button:hover{
+	background: #a1a1a1;
+}
+
+.about-page-button{
+    font-size: 1.5em;
+
+}
