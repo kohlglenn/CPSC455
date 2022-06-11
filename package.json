@@ -4,9 +4,10 @@
   "description": "front-end and back-end for our cs 455 project",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
+    "installAll": "cd front-end && npm install && cd ../back-end && npm install",
     "client": "npm --prefix front-end run start",
     "server": "npm --prefix back-end run start",
-    "dev": "concurrently \"npm run client\" \"npm run server\""
+    "dev": "npm run installAll && concurrently \"npm run client\" \"npm run server\""
   },
   "repository": {
     "type": "git",
