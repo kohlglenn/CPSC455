@@ -34,7 +34,6 @@ function Landing() {
   return (
     <LayoutWithAppbar>
         Landing
-        {/* <LobbyCreation></LobbyCreation> */}
     </LayoutWithAppbar>
   );
 }
