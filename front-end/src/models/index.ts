@@ -18,6 +18,13 @@ export interface Restaurant {
   location: { lat: number; long: number };
 }
 
+export interface Lobby {
+  name: string;
+  id: number;
+  members: (User | null)[];
+  lobby_photo?: string;
+}
+
 export interface GoogleNearbyPlaceResponse {
   name: string;
   geometry: { location: any };

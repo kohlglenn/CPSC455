@@ -1,0 +1,39 @@
+{
+    "lobbies": [
+      {
+      "name": "Sample Lobby Name 1",
+      "id": 123,
+      "members": [
+        {
+          "name":"Sample User 1",
+          "email": "sampleemail1@sample.com"
+        },
+        {
+          "name":"Sample User 2",
+          "email": "sampleemail3@sample.com"
+        },
+        {
+          "name":"Sample User 3",
+          "email": "sampleemail3@sample.com"
+        },
+        {
+          "name":"Sample User 4",
+          "email": "sampleemail4@sample.com"
+        },
+        {
+          "name":"Sample User 5",
+          "email": "sampleemail5@sample.com"
+        },
+        {
+          "name":"Sample User 6",
+          "email": "sampleemail6@sample.com"
+        }
+      ]
+    },
+    {
+      "name": "Sample Lobby Name 2",
+      "id": 124,
+      "members": []
+    }
+    ]
+}

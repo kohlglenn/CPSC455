@@ -1,0 +1,75 @@
+.lobby-page {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 80vh;
+}
+.lobby-page-header {
+    height: 20%;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    font-size: 25px;
+    font-weight: 600;
+}
+
+.lobby-page-body {
+    display: flex;
+    flex-direction: row;
+    height: 60%;
+    width: 80%;
+}
+
+
+.lobby-participants {
+    width: 50%;
+    height: 60%;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-content: flex-start;
+    margin: 10px;
+}
+
+.lobby-participant {
+    display: flex;
+    flex-direction: column;
+    width: 25%;
+    align-items: center;
+    padding-top: 10px;
+}
+
+.lobby-participant-name {
+    text-align: center;
+    width: 80%;
+}
+
+.lobby-buttons {
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.lobby-settings-button, .lobby-filters-button, .lobby-add-members-button, .lobby-start-search-button {
+    border: none;
+    background-color:rgb(228, 80, 80);
+    border-radius: 50px;
+    font-size: 25px;
+    font-weight: 600;
+    color: white;
+    height: 40px;
+    width: 60%;
+    margin-top: 13%;
+    cursor: pointer;
+}
+
+.lobby-page-footer {
+    height: 20%;
+    width: 50%;
+    display: flex;
+    justify-content: center;
+}
+.lobby-page-divider {
+    width: 80%;
+}
