@@ -7,6 +7,7 @@ export const setUser = (user: User | null) => {
   };
 };
 
+
 export const setRestaurants = (restaurants: Restaurant[]) => {
   return {
     type: "SET_RESTAUARANTS",

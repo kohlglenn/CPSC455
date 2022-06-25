@@ -13,16 +13,25 @@ import MenuItem from '@mui/material/MenuItem';
 import MenuIcon from '@mui/icons-material/Menu';
 import AdbIcon from '@mui/icons-material/Adb';
 
-import {useSelector} from 'react-redux';
+import {useDispatch, useSelector} from 'react-redux';
 import { ReduxState } from '../../reducers';
 
+import userCookies from '../../models/userCookies';
+import { setUser } from '../../actions';
+import { useNavigate } from 'react-router';
+import { getUserAsync } from '../../models/rest';
+import { User } from '../../models';
+
 const pages = ['Products', 'Pricing', 'Blog'];
-const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
+const settings = ['Profile', 'Account', 'Dashboard', 'Logout', "Admin"];
 
 const ResponsiveAppBar = () => {
   const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(null);
   const [anchorElUser, setAnchorElUser] = React.useState<null | HTMLElement>(null);
+
   const user = useSelector((state: ReduxState) => state.user);
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const handleOpenNavMenu = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorElNav(event.currentTarget);
@@ -35,7 +44,26 @@ const ResponsiveAppBar = () => {
     setAnchorElNav(null);
   };
 
-  const handleCloseUserMenu = () => {
+  const handleCloseUserMenu = (event:any) => {
+    switch(event.currentTarget.id){
+      case "Profile":
+        navigate('/account')
+        break;
+      case "Logout":
+        userCookies.logout();
+        dispatch(setUser(null));
+        break;
+      case "Admin":
+        userCookies.storeUser("abcd123");
+        getUserAsync().then((res: Response) => {
+          if (res.ok) {
+            return res.json().then((user: User) => {
+              dispatch(setUser(user));
+            });
+          }
+        });
+        break;
+    }
     setAnchorElUser(null);
   };
 
@@ -152,7 +180,7 @@ const ResponsiveAppBar = () => {
               onClose={handleCloseUserMenu}
             >
               {settings.map((setting) => (
-                <MenuItem key={setting} onClick={handleCloseUserMenu}>
+                <MenuItem key={setting} id = {setting} onClick={handleCloseUserMenu}>
                   <Typography textAlign="center">{setting}</Typography>
                 </MenuItem>
               ))}

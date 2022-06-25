@@ -6,6 +6,8 @@ import LobbySelection from './components/pages/LobbySelection';
 import LobbyPage from './components/pages/LobbyPage';
 
 import ContactPage from './components/pages/ContactPage';
+import AccountInfo from './components/pages/AccountInfo';
+import AccountLogin from './components/pages/AccountLogin';
 
 function App() {
   return (
@@ -15,6 +17,8 @@ function App() {
         {/* <Route path ="/about" caseSensitive={false} element={<About/>} /> */}
         <Route path ="/selection" caseSensitive={false} element={<Selection/>} />
         <Route path ="/contact" caseSensitive={false} element={<ContactPage/>} />
+        <Route path ="/account" caseSensitive={false} element={<AccountInfo/>} />
+        <Route path ="/login" caseSensitive={false} element={<AccountLogin/>} />
         <Route path ="/lobbyselection" caseSensitive={false} element={<LobbySelection/>} />
         <Route path ="/lobbypage" caseSensitive={false} element={<LobbyPage/>} />
 

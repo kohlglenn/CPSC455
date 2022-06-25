@@ -1,10 +1,13 @@
 import { combineReducers } from "redux";
+import cookieHandler from "../models/userCookies";
 import { User, Action, Restaurant, Lobby } from "../models";
 import sampleLobbyData from '../SampleLobbyData.json';
 
 const user = (user: User | null = null, action: Action) => {
   switch (action.type) {
     case "SET_USER":
+      if (action.payload != null)
+        cookieHandler.storeUser(action.payload.id);
       return action.payload;
     default:
       return user;
