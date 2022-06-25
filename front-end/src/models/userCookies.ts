@@ -13,5 +13,8 @@ const logout = () =>{
     cookies.remove('user');
 }
 
-/*cookies.set('myCat', 'Pacman', { path: '/' });
-console.log(cookies.get('myCat')); // Pacmang*/
+export default {
+    getUser,
+    storeUser,
+    logout
+}

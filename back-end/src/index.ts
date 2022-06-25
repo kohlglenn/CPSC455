@@ -26,7 +26,7 @@ app.post("/dummy", (req: Request, res: Response) => {
 
 app.post("/users", (req: Request, res: Response) => {
   try{
-  let id = userHandler.addUser(req.body.name);
+  let id = userHandler.addUser(req.body.name, req.body.email);
   res.send(id);
   }catch (error:any) {
     console.error(error.message);
@@ -40,6 +40,19 @@ app.get('/users/:user_id', async (req, res) => {
     res.send(userHandler.findUser(userID));
   } catch (error:any) {
     console.error(error.message);
+    res.status(500).send('Server Error');
+  }
+});
+
+app.get('/users/login/', async (req, res) => {
+  const email = req.body.email;
+  const passwd = req.body.password;
+  try {
+    res.send(userHandler.authenticateUser(email, passwd));
+  } catch (error:any) {
+    console.error(error.message);
+    if (error.message === "Invalid authentication")
+      res.status(401).send("Invalid authentication");
     res.status(500).send('Server Error');
   }
 });
