@@ -14,8 +14,8 @@ import { getUserAsync } from '../../models/rest';
 
 function Landing() {
 
-  const dispatch = useDispatch();
   const user = useSelector((state: ReduxState) => state.user);
+  const dispatch = useDispatch();
 
   useEffect(() => {
     /*if (!user) {

@@ -44,7 +44,7 @@ app.get('/users/:user_id', async (req, res) => {
   }
 });
 
-app.get('/users/login/', async (req, res) => {
+app.post('/users/login/', async (req, res) => {
   const email = req.body.email;
   const passwd = req.body.password;
   try {

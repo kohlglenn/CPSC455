@@ -5,7 +5,8 @@ import cookieHandler from "../models/userCookies";
 const user = (user: User | null = null, action: Action) => {
   switch (action.type) {
     case "SET_USER":
-      cookieHandler.storeUser(action.payload.id);
+      if (action.payload != null)
+        cookieHandler.storeUser(action.payload.id);
       return action.payload;
     default:
       return user;

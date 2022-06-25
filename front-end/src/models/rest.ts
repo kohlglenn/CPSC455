@@ -1,3 +1,4 @@
+import { ObjectHTMLAttributes } from "react";
 import userCookies from "./userCookies";
 
 export const getUserAsync = async () => {
@@ -9,5 +10,19 @@ export const getUserAsync = async () => {
         headers: {
             'Content-Type': 'application/json'
         }
+    })
+};
+
+export const userLoginAsync = async(info:Object) =>{
+    const userid = userCookies.getUser();
+    const url = "http://localhost:5000" + '/users/login';
+
+    return fetch(url, {
+
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(info)
     })
 };

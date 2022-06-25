@@ -41,12 +41,13 @@ const findUser = (uuid: string) => {
 const authenticateUser = (email: string, password: string) => {
     if (email === undefined || password === undefined)
         throw new Error("Invalid Login");
-    for (const [key, user] of Object.entries(usersMap)) {
-        if (user.email === email)
+    for (const [key, user] of usersMap) {
+        if (user.email === email){
             if (user.password === password)
                 return user;
             else 
                 throw new Error("Invalid authentication");
+        }
     }
     throw new Error("User undefined");
 }
