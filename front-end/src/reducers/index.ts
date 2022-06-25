@@ -7,8 +7,6 @@ const user = (user: User | null = null, action: Action) => {
     case "SET_USER":
       cookieHandler.storeUser(action.payload.id);
       return action.payload;
-    case "GET_USER":
-      
     default:
       return user;
   }

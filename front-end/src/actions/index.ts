@@ -7,11 +7,6 @@ export const setUser = (user: User | null) => {
   };
 };
 
-export const getUser = () => {
-  return {
-    type: "GET_USER",
-  };
-};
 
 export const setRestaurants = (restaurants: Restaurant[]) => {
   return {

@@ -6,7 +6,7 @@ import './Landing.css'
 import { useDispatch, useSelector } from 'react-redux';
 import { ReduxState } from '../../reducers';
 
-import { setUser, getUser } from '../../actions';
+import { setUser } from '../../actions';
 import { User } from '../../models';
 
 import AboutPage from '../widgets/AboutPage';
@@ -39,7 +39,6 @@ function Landing() {
         if (res.ok) {
           return res.json().then((user: User) => {
             dispatch(setUser(user));
-            console.log(user);
           });
         }
       });

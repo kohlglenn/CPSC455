@@ -2,8 +2,7 @@ import Cookies from 'universal-cookie';
 const cookies = new Cookies();
 
 const getUser = ()=>{
-    return "abcd123";
-    //return cookies.get('user');
+    return cookies.get('user');
 }
 
 const storeUser = (uid:string) =>{
@@ -19,5 +18,3 @@ export default {
     storeUser,
     logout
 }
-/*cookies.set('myCat', 'Pacman', { path: '/' });
-console.log(cookies.get('myCat')); // Pacmang*/
