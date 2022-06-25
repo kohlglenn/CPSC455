@@ -1,9 +1,9 @@
 import React, {useEffect} from 'react';
 import LayoutWithAppbar from '../layout/LayoutWithAppbar'
-import sampleData from '../../SampleData.json';
+import sampleData from '../../YelpSampleData.json';
 import {useSelector, useDispatch} from 'react-redux';
 import { ReduxState } from '../../reducers';
-import { GoogleNearbyPlaceResponse, Restaurant } from '../../models';
+import { Restaurant, YelpBusinessSearchResponse } from '../../models';
 import { setRestaurants } from '../../actions';
 import RestaurantCard, { Props } from '../widgets/RestaurantCard';
 
@@ -18,15 +18,15 @@ function Selection() {
   
   useEffect(() => {
     if (restaurants.length === 0) {
-      const restaurants = sampleData.results.map((result: GoogleNearbyPlaceResponse) => {
+      const restaurants = sampleData.businesses.map((result: YelpBusinessSearchResponse) => {
         const restaurant: Restaurant = {
+          id: result.id as string,
           name: result.name,
-          open_now: result.opening_hours.open_now,
-          photos: ["https://images.pexels.com/photos/262978/pexels-photo-262978.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"],
-          price_level: result.price_level,
+          photos: [result.image_url],
+          price_level: result.price,
           rating: result.rating,
-          user_ratings_total: result.user_ratings_total,
-          location: result.geometry.location
+          user_ratings_total: result.review_count,
+          location: result.coordinates
         };
         return restaurant;
       });

@@ -1,25 +1,39 @@
 import React, { useState, useEffect } from 'react';
 import LayoutWithAppbar from '../layout/LayoutWithAppbar';
+import { useSelector, useDispatch } from 'react-redux';
+import { ReduxState } from '../../reducers';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { solid, regular, brands } from '@fortawesome/fontawesome-svg-core/import.macro'
+import { useNavigate } from "react-router-dom";
+import { setLobbies } from '../../actions';
+    
 
 import './LobbySelection.css';
-const lobbyListExample = [
-    'Example Group 1',
-    'Example Group 2',
-    'Example Group 3'
-]
+
+const { v4: uuid } = require('uuid');
 
 function LobbySelection() {
-    const [lobbyList, setLobbyList] = useState(lobbyListExample);
-    const [showLogin, setShowLogin] = useState(false);
+    const lobbies = useSelector((state: ReduxState) => state.lobbies);
+    const user = useSelector((state: ReduxState) => state.user);
+
+    const dispatch = useDispatch();
+    let navigate = useNavigate();
+
+    useEffect(() => {
+        dispatch(setLobbies(lobbies));
+    }, []);
 
     const handleLobbyGroupClicked = (lobby: any) => {
-        console.log(lobby);
+        navigate('/lobbypage', { state: lobby });
     }
 
     const handleCreateGroupClicked = () => {
-        console.log('Create Group clicked');
+        let tempLobby = {
+            name: 'Temporary Lobby Name',
+            id: uuid(),
+            members: [user]
+        }
+        navigate('/lobbypage', { state: tempLobby });
     }
 
 
@@ -30,13 +44,13 @@ function LobbySelection() {
                     Join a Group:
                 </span>
                 <div className='lobby-selection-body'>
-                    {lobbyList.map((lobby) => {
+                    {lobbies.map((lobby) => {
                         return (
-                            <div className='lobby-group' onClick={() => {
+                            <div key={lobby.id} className='lobby-group' onClick={() => {
                                 handleLobbyGroupClicked(lobby);
                             }}>
-                                <FontAwesomeIcon icon={solid('users')} className='group-lobby-icon' size="3x"></FontAwesomeIcon>
-                                <span className='lobby-name'>{lobby}</span>
+                                {!lobby.lobby_photo && <FontAwesomeIcon icon={solid('users')} className='group-lobby-icon' size="3x"></FontAwesomeIcon>}
+                                <span className='lobby-name'>{lobby.name}</span>
                             </div>
                         );
                     })}

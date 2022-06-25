@@ -76,8 +76,6 @@ function Landing() {
         <img className="landing-image" src={require("./../../logo.png")} />
       </div>
 
-      {/* <LobbyCreation></LobbyCreation> */}
-
     </LayoutWithAppbar>
   );
 }

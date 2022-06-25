@@ -2,7 +2,9 @@ import './App.css';
 import { BrowserRouter as Router, Route, Link, Routes } from "react-router-dom";
 import Landing from './components/pages/Landing';
 import Selection from './components/pages/Selection';
-import LobbySelection from './components/pages/LobbyCreation';
+import LobbySelection from './components/pages/LobbySelection';
+import LobbyPage from './components/pages/LobbyPage';
+
 import ContactPage from './components/pages/ContactPage';
 import AccountInfo from './components/pages/AccountInfo';
 import AccountLogin from './components/pages/AccountLogin';
@@ -17,6 +19,9 @@ function App() {
         <Route path ="/contact" caseSensitive={false} element={<ContactPage/>} />
         <Route path ="/account" caseSensitive={false} element={<AccountInfo/>} />
         <Route path ="/login" caseSensitive={false} element={<AccountLogin/>} />
+        <Route path ="/lobbyselection" caseSensitive={false} element={<LobbySelection/>} />
+        <Route path ="/lobbypage" caseSensitive={false} element={<LobbyPage/>} />
+
       </Routes>
     </Router>
   );

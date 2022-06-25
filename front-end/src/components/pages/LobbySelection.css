@@ -25,6 +25,7 @@
     flex-direction: column;
     align-items: center;
 }
+
 .lobby-group {
     display: flex;
     flex-direction: row;

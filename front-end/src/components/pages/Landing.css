@@ -15,11 +15,9 @@
     top: 20%;
     left: 5%;
     text-align: left;
-
 }
 
-
-button{
+.about-page-button, .create-account-button {
 	cursor: pointer;
 	background: #e7e7e7;
 	border: none;
@@ -41,5 +39,4 @@ button:hover{
 
 .about-page-button{
     font-size: 1.5em;
-
 }

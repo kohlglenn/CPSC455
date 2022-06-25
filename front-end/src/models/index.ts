@@ -9,13 +9,38 @@ export interface User {
 }
 
 export interface Restaurant {
+  id: string; // yelp id
   name: string;
-  open_now: boolean;
   photos: string[];
-  price_level: number | undefined;
+  price_level?: string;
   rating: number;
   user_ratings_total: number;
-  location: { lat: number; long: number };
+  location: { latitude: number; longitude: number };
+}
+
+// https://www.yelp.com/developers/documentation/v3/business_search
+export interface YelpBusinessSearchResponse {
+  id: string;
+  categories: { alias: string; title: string }[];
+  coordinates: { latitude: number; longitude: number };
+  distance: number; // meters
+  image_url: string;
+  is_closed: boolean; // permanently closed
+  location: {
+    display_address: string[]; // Array of strings that if organized vertically give an address that is in the standard address format for the business's country.
+  };
+  name: string;
+  phone: string;
+  price?: string;
+  rating: number;
+  review_count: number;
+}
+
+export interface Lobby {
+  name: string;
+  id: number;
+  members: (User | null)[];
+  lobby_photo?: string;
 }
 
 export interface GoogleNearbyPlaceResponse {

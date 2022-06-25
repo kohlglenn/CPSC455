@@ -1,6 +1,5 @@
 import dotenv from "dotenv";
 import express, { Express, Request, Response, NextFunction } from "express";
-import * as bodyParser from "body-parser";
 import cors from "cors";
 import userHandler from "./userHandler";
 
@@ -8,11 +7,13 @@ import userHandler from "./userHandler";
 dotenv.config();
 const port = process.env.PORT || "5000";
 
+const restaurantsRouter = require("./routes/restaurants");
+
 const app: Express = express();
 app.use(cors());
-app.use(bodyParser.urlencoded({ extended: true }));
-app.use(bodyParser.json());
-app.use(bodyParser.raw());
+app.use(express.json());
+app.use(express.raw());
+app.use(express.urlencoded({ extended: false }));
 
 // define a route handler for the default home page
 app.get("/", (req: Request, res: Response) => {
@@ -60,6 +61,7 @@ app.post('/users/login/', async (req, res) => {
 app.get("/users", (req: Request, res: Response) => {
   res.send(userHandler.getAll());
 });
+app.use("/restaurants", restaurantsRouter);
 
 // start the express server
 app.listen(port, () => {
