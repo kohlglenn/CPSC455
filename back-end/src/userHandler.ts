@@ -1,6 +1,7 @@
 
 const { v4: uuid } = require('uuid');
 
+//TODO: encrypt passwords, updated for mongoDB
 const usersInitial = [
     {
         id: "abcd123",

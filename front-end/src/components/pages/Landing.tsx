@@ -34,6 +34,7 @@ function Landing() {
         });
     }*/
 
+    //TODO: pull out this user finder into another component
     if (!user) {
       getUserAsync().then((res: Response) => {
         if (res.ok) {
