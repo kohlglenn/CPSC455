@@ -3,12 +3,16 @@ const { v4: uuid } = require('uuid');
 
 const usersInitial = [
     {
-        id: uuid(),
-        name: "Steve"
+        id: "abcd123",
+        name: "Steve",
+        email: "steve@email.sfx",
+        password: "password1"
     },
     {
         id: uuid(),
-        name: "Joe"
+        name: "Joe",
+        email: "joe@email.sfx",
+        password: "password2"
     }
 ];
 
@@ -18,19 +22,33 @@ const usersMap = new Map(); //replaced with database API later
 
 usersInitial.map(usr => usersMap.set(usr.id, usr));
 
-const addUser = (iname: string) => {
-    if (iname === undefined)
-        throw new Error("Name undefined");
+const addUser = (iname: string, email: string) => {
+    if (iname === undefined || email === undefined)
+        throw new Error("Missing data");
     const newUser = { id: uuid(), name: iname };
     usersMap.set(newUser.id, newUser);
     return newUser.id;
 }
 
 const findUser = (uuid: string) => {
-    let user =  usersMap.get(uuid);
+    let user = usersMap.get(uuid);
     if (user === undefined)
         throw new Error("User undefined");
+    console.log(user);
     return user;
+}
+
+const authenticateUser = (email: string, password: string) => {
+    if (email === undefined || password === undefined)
+        throw new Error("Invalid Login");
+    for (const [key, user] of Object.entries(usersMap)) {
+        if (user.email === email)
+            if (user.password === password)
+                return user;
+            else 
+                throw new Error("Invalid authentication");
+    }
+    throw new Error("User undefined");
 }
 
 const getAll = () => {
@@ -40,5 +58,6 @@ const getAll = () => {
 export default {
     addUser,
     findUser,
+    authenticateUser,
     getAll
 };
