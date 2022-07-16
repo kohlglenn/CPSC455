@@ -3,6 +3,7 @@ import { Action as ReduxAction } from "redux";
 export type Action = ReduxAction & { payload: any };
 
 export interface User {
+  _id: string;
   name: string;
   email: string;
   profileUrl?: string;
@@ -38,8 +39,18 @@ export interface YelpBusinessSearchResponse {
 
 export interface Lobby {
   id: string;
-  participants: (User | null)[];
+  participants: User[];
   numberRestaurants: number;
+  restaurants: Restaurant[];
+  votes: Vote[];
+}
+
+export type VoteResult = "yes" | "no";
+
+export interface Vote {
+  user_id: string;
+  restaurant_id: string;
+  vote: VoteResult;
 }
 
 export interface GoogleNearbyPlaceResponse {

@@ -1,5 +1,5 @@
 import { Request, Router } from "express";
-import fetch from "node-fetch";
+import { yelpApiQuery } from "./util";
 
 const router = Router();
 
@@ -19,19 +19,7 @@ router.get("/", function (req, res, next) {
       res.send(cache[`${latitude}${longitude}`]);
       return;
     }
-    const urlString =
-      "https://api.yelp.com/v3/businesses/search?" +
-      new URLSearchParams({
-        latitude,
-        longitude,
-      });
-    const options = {
-      method: "GET",
-      headers: {
-        Authorization: process.env.YELP_AUTH_KEY || "",
-      },
-    };
-    fetch(urlString, options)
+    yelpApiQuery(latitude, longitude)
       .then(async (result) => {
         cache[`${latitude}${longitude}`] = await result.json();
         res.send(cache[`${latitude}${longitude}`]);

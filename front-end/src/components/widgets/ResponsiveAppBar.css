@@ -1,0 +1,19 @@
+.icon-md {
+    display: flex;
+    height: 64px;
+}
+
+.icon-xs {
+    display: none;
+    height: 64px;
+    margin-right: 10%;
+}
+
+@media screen and (max-width: 768px) {
+    .icon-md {
+        display: none;
+    }
+    .icon-xs {
+        display: flex;
+    }
+}
