@@ -10,7 +10,6 @@ const queries = {
     },
 
     getUser: async function (userid:string) {
-        console.log(userid);
         const user = await Users.findOne({_id: mongoose.Types.ObjectId((userid))}, callback);
         return user;
     },
@@ -24,8 +23,9 @@ const queries = {
     },
 
     authenticateUser: async function(email:string, password:string){
-        const user = await Users.find({email:email});
-        if (password ===user.password){
+        const user = await Users.findOne({email:email});
+        console.log(user);
+        if (password === user.password){
             return user;
         }
         else{

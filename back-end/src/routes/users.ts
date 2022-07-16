@@ -3,7 +3,6 @@ import fetch from "node-fetch";
 
 const queries = require('../db/mongodb').queries;
 const router = Router();
-console.log(queries);
 
 
 
