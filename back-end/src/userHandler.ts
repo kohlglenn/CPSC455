@@ -1,7 +1,8 @@
 
+//DEPRECIATED FILE
 const { v4: uuid } = require('uuid');
 
-//TODO: encrypt passwords, updated for mongoDB
+//TODO: REWRITE ENTIRE FILE FOR MONGODB + ENCRYPT PASSWORD
 const usersInitial = [
     {
         id: "abcd123",
@@ -35,7 +36,6 @@ const findUser = (uuid: string) => {
     let user = usersMap.get(uuid);
     if (user === undefined)
         throw new Error("User undefined");
-    console.log(user);
     return user;
 }
 

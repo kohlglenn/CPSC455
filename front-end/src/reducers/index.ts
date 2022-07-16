@@ -7,7 +7,7 @@ const user = (user: User | null = null, action: Action) => {
   switch (action.type) {
     case "SET_USER":
       if (action.payload != null)
-        cookieHandler.storeUser(action.payload.id);
+        cookieHandler.storeUser(action.payload._id.toString());
       return action.payload;
     default:
       return user;

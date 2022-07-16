@@ -54,7 +54,7 @@ const ResponsiveAppBar = () => {
         dispatch(setUser(null));
         break;
       case "Admin":
-        userCookies.storeUser("abcd123");
+        userCookies.storeUser("62d27907123d7ef0cd4a4a89");
         getUserAsync().then((res: Response) => {
           if (res.ok) {
             return res.json().then((user: User) => {
