@@ -21,7 +21,7 @@ import './LobbyPage.css'
 
 export interface LobbyProps {
     id?: string;
-    participants: (User | null)[];
+    participants: User[];
     numberRestaurants: number;
     newLobby: boolean,
 }
@@ -43,7 +43,7 @@ function LobbyPage(props: LobbyProps) {
                 text += letters.charAt(Math.random() * letters.length);
             }
             setLobbyID(text);
-            const lobby: Lobby = { id: text, participants: lobbyData.participants, numberRestaurants: lobbyData.numberRestaurants };
+            const lobby: Lobby = { id: text, participants: lobbyData.participants, numberRestaurants: lobbyData.numberRestaurants, restaurants: [], votes: [] };
             addLobbyAsync(lobby);
         }
     }, [])
