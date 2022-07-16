@@ -11,12 +11,13 @@ import { User } from '../../models';
 
 import AboutPage from '../widgets/AboutPage';
 import { getUserAsync } from '../../models/rest';
+import UserWidget from '../widgets/UserWidget';
 
 function Landing() {
 
   const user = useSelector((state: ReduxState) => state.user);
   const dispatch = useDispatch();
-
+/*
   useEffect(() => {
     /*if (!user) {
       const dummyUser: User = {name: "Kohl Peterson", email: "kohlglenn@gmail.com", profileUrl: "https://kohlpeterson.dev/static/921e165bad85f0ec2576f68c44b57e9b/41070/profile.jpg"};
@@ -32,7 +33,7 @@ function Landing() {
             return res.json().then((user: User) => dispatch(setUser(user)));
           }
         });
-    }*/
+    }
 
     //TODO: pull out this user finder into another component
     if (!user) {
@@ -45,6 +46,7 @@ function Landing() {
       });
     }
   }, []);
+  */
 
   const [isAboutVisible, setAboutVisible] = useState(false);
 
@@ -58,6 +60,7 @@ function Landing() {
 
   return (
     <LayoutWithAppbar>
+      <UserWidget/>
       <div className="landing-page">
         <div className="landing-content">
           <h1 className="landing-title">Go2Eat</h1>

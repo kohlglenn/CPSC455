@@ -24,6 +24,7 @@ import { User } from '../../models';
 import { ReduxState } from '../../reducers';
 import { useEffect } from 'react';
 import { Navigate } from 'react-router';
+import UserWidget from '../widgets/UserWidget';
 
 function Copyright(props: any) {
   return (
@@ -41,17 +42,6 @@ function Copyright(props: any) {
 
 const theme = createTheme();
 export default function AccountLogin() {
-  useEffect(() => {
-    if (!user) {
-      getUserAsync().then((res: Response) => {
-        if (res.ok) {
-          return res.json().then((user: User) => {
-            dispatch(setUser(user));
-          });
-        }
-      });
-    }
-  }, []);
 
   const user = useSelector((state: ReduxState) => state.user);
   const dispatch = useDispatch();
@@ -77,6 +67,7 @@ export default function AccountLogin() {
   }
   return (
     <LayoutWithAppbar>
+    <UserWidget/>
     <ThemeProvider theme={theme}>
       <Container component="main" maxWidth="xs">
         <CssBaseline />
