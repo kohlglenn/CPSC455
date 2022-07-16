@@ -7,7 +7,7 @@ import { setUser } from '../../actions';
 import { User } from '../../models';
 
 
-export default function userWidget(props: any) {
+export default function UserWidget(props: any) {
 
     const dispatch = useDispatch();
     const user = useSelector((state: ReduxState) => state.user);
