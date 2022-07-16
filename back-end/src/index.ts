@@ -8,6 +8,7 @@ dotenv.config();
 const port = process.env.PORT || "5000";
 
 const restaurantsRouter = require("./routes/restaurants");
+const lobbyRouter = require("./routes/lobby");
 
 const app: Express = express();
 app.use(cors());
@@ -60,8 +61,10 @@ app.post('/users/login/', async (req, res) => {
 
 app.get("/users", (req: Request, res: Response) => {
   res.send(userHandler.getAll());
+
 });
 app.use("/restaurants", restaurantsRouter);
+app.use("/lobby", lobbyRouter);
 
 // start the express server
 app.listen(port, () => {

@@ -1,29 +1,60 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import LayoutWithAppbar from '../layout/LayoutWithAppbar'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { solid, regular, brands } from '@fortawesome/fontawesome-svg-core/import.macro'
 import { ReduxState } from '../../reducers';
 import { useNavigate, useLocation } from "react-router-dom";
+import { addLobby } from '../../actions';
+import { Lobby } from '../../models';
+import LobbySettings from '../widgets/LobbySettings';
+
+
+
 
 import { useSelector, useDispatch } from 'react-redux';
 import { User } from '../../models';
+import { addLobbyAsync, updateNumberRestaurantsAsync } from '../../models/rest';
+
 
 import './LobbyPage.css'
 
 
 export interface LobbyProps {
-    name: string;
-    id: number;
-    members: (User | null)[];
-    lobby_photo?: string;
+    id?: string;
+    participants: (User | null)[];
+    numberRestaurants: number;
+    newLobby: boolean,
 }
-function LobbyPage() {
+function LobbyPage(props: LobbyProps) {
     const lobbyData = useLocation().state as LobbyProps;
-    const user = useSelector((state: ReduxState) => state.user);
+    const [lobbyID, setLobbyID] = useState(lobbyData.id);
+    const [showSettings, setShowSettings] = useState(false);
 
+    const user = useSelector((state: ReduxState) => state.user);
+    const defaultNumberRestaurants = 50;
+    const dispatch = useDispatch();
+
+    useEffect(() => {
+        if (lobbyData.newLobby) {
+            var text = "";
+            var letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+            
+            for (var i = 0; i < 4; i++) {
+                text += letters.charAt(Math.random() * letters.length);
+            }
+            setLobbyID(text);
+            const lobby: Lobby = { id: text, participants: lobbyData.participants, numberRestaurants: lobbyData.numberRestaurants };
+            addLobbyAsync(lobby);
+        }
+    }, [])
     
     const handleLobbySettingsClick = () => {
-        console.log('settings clicked');
+        setShowSettings(true);
+    }
+
+    const handleNumberRestaurantsChange = (num: number) => {
+        updateNumberRestaurantsAsync({ id: lobbyID, numRestaurants: num });
+        setShowSettings(false);
     }
 
     const handleLobbyFiltersClick = () => {
@@ -38,25 +69,19 @@ function LobbyPage() {
     return (
         <LayoutWithAppbar>
             <div className='lobby-page'>
+                {showSettings && <LobbySettings onNumberRestaurantsChange={handleNumberRestaurantsChange}></LobbySettings>}
                 <div className='lobby-page-header'>
-                    {lobbyData.name}
+                    Go2Eat Lobby
                 </div>
                 <hr className='lobby-page-divider'></hr>
                 <div className='lobby-page-body'>
-                    <div className='lobby-participants'>
-                        {lobbyData.members.map((member) => {
-                          return (
-                            <div className='lobby-participant'> 
-                                <FontAwesomeIcon icon={solid('user')} className='lobby-participant-icon' size='3x'/>
-                                <span className='lobby-participant-name'>{member?.name}</span>
-                            </div>
-                          ); 
-                        })}
-                    </div>
+                    <div className='lobby-participants'>Participants</div>
                     <div className='lobby-buttons'>
+                        <div className='lobby-room-code'>
+                            <span>Room Code:</span>
+                            <span>{lobbyID}</span>
+                        </div>
                         <button className='lobby-settings-button' onClick={handleLobbySettingsClick}>Settings</button>
-                        <button className='lobby-filters-button' onClick={handleLobbyFiltersClick}>Search Filters</button>
-                        <button className='lobby-add-members-button' onClick={handleAddMembersClick}>Add Members</button>
                     </div>
                 </div>
                 <hr className='lobby-page-divider'></hr>

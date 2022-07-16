@@ -37,10 +37,9 @@ export interface YelpBusinessSearchResponse {
 }
 
 export interface Lobby {
-  name: string;
-  id: number;
-  members: (User | null)[];
-  lobby_photo?: string;
+  id: string;
+  participants: (User | null)[];
+  numberRestaurants: number;
 }
 
 export interface GoogleNearbyPlaceResponse {
