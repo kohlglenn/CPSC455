@@ -21,3 +21,10 @@ export const setLobbies = (lobbies: Lobby[]) => {
     payload: lobbies,
   };
 };
+
+export const addLobby = (lobby: Lobby) => {
+  return {
+    type: "ADD_LOBBY",
+    payload: lobby,
+  }
+}

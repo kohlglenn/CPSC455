@@ -23,7 +23,7 @@ const restaurants = (restaurants: Restaurant[] = [], action: Action) => {
   }
 };
 
-const lobbies = (lobbies: Lobby[] = sampleLobbyData.lobbies, action: Action) => {
+const lobbies = (lobbies: Lobby[] = [], action: Action) => {
   switch (action.type) {
     case "SET_LOBBIES":
       return [...action.payload];
