@@ -6,12 +6,14 @@ function generateData() {
         {
         name: "Steve",
         email: "steve@email.sfx",
-        passwordHash: "password1"
+        passwordHash: "password1",
+        lastlogin: Date.now()
     },);
     const admin2 = new User({
             name: "Joe",
             email: "joe@email.sfx",
-            passwordHash: "password2"
+            passwordHash: "password2",
+            lastlogin: Date.now()
         });
 
 

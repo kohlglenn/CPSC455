@@ -15,3 +15,9 @@ export const yelpApiQuery = (latitude: string, longitude: string) => {
   };
   return fetch(urlString, options);
 };
+
+export const createToken = () => {
+  const str1 = Math.random().toString(36).substring(2);
+  const str2 = Math.random().toString(36).substring(2);
+  return str1 + str2;
+};

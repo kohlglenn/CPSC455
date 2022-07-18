@@ -1,6 +1,7 @@
 const mongoose = require('mongoose');
 
-const Restaurant = require("../models/Restaurant");
+import { Restaurant } from "../models";
+
 
 // create schema
 const userSchema = new mongoose.Schema({
@@ -9,7 +10,7 @@ const userSchema = new mongoose.Schema({
     passwordHash: String, //debug purposes
     upvotes: Map,
     downvotes: Map,
-    restaurantHistory: [Restaurant],
+    restaurantHistory: [],
     lastlogin: Number,
     token: String
 });

@@ -1,4 +1,5 @@
 import { Restaurant } from "../models";
+import { createToken } from "../routes/util";
 
 const Users = require('./schemas');
 const mongoose = require('mongoose');
@@ -16,15 +17,16 @@ const queries = {
         return user;
     },
 
-    addUser: async function (content:any){
+    addUser: async function (name:string, email:string, passwordHash:string){
         const newUser = new Users({
-            name: content.name,
-            email: content.email,
-            passwordHash: content.passwordHash,
+            name: name,
+            email: email,
+            passwordHash: passwordHash,
             upvotes: new Map(),
             downvotes: new Map(),
             restaurantHistory: [],
-            lastlogin: Date.now()
+            lastlogin: Date.now(),
+            token: createToken()
         });
         newUser.save()
         return newUser;
@@ -39,6 +41,9 @@ const queries = {
         const user = await Users.findOne({email:email});
         console.log(user);
         if (passwordHash === user.passwordHash){
+            user.token = createToken();
+            user.lastlogin = Date.now();
+            user.save()
             return user;
         }
         else{
@@ -51,9 +56,10 @@ const queries = {
         let unixDiff = Date.now() - user.lastlogin;
         let diffHours = unixDiff / 1000 / 60 / 60;
         if (token === user.token){
-            if (diffHours > 336)
-                throw new Error("Expired Token");
-            return user;
+            if (diffHours < 336){
+                user.lastlogin = Date.now();
+                return user;
+            }
         }
         throw new Error("Invalid Token");
     },
