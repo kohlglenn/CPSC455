@@ -1,15 +1,21 @@
 const mongoose = require('mongoose');
 
+const Restaurant = require("../models/Restaurant");
+
 // create schema
 const userSchema = new mongoose.Schema({
     name: String,
     email: String,
-    password: String, //debug purposes
-    lastlogin: Number
+    passwordHash: String, //debug purposes
+    upvotes: Map,
+    downvotes: Map,
+    restaurantHistory: [Restaurant],
+    lastlogin: Number,
+    token: String
 });
 
 userSchema.methods.speak = function speak() {
-    console.log(`I'm a talking reci[e] named ${this.name}`);
+    console.log(`I'm a talking user named ${this.name}`);
 }
 
 // create model
