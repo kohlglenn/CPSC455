@@ -1,16 +1,19 @@
 const User = require('./schemas');
 
+
 function generateData() {
     const admin1 = new User(
         {
         name: "Steve",
         email: "steve@email.sfx",
-        password: "password1"
+        passwordHash: "password1",
+        lastlogin: Date.now()
     },);
     const admin2 = new User({
             name: "Joe",
             email: "joe@email.sfx",
-            password: "password2"
+            passwordHash: "password2",
+            lastlogin: Date.now()
         });
 
 

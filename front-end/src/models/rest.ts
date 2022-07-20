@@ -15,8 +15,20 @@ export const getUserAsync = async () => {
 };
 
 export const userLoginAsync = async(info:Object) =>{
-    const userid = userCookies.getUser();
     const url = "http://localhost:5000" + '/users/login';
+
+    return fetch(url, {
+
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(info)
+    })
+};
+
+export const userCreateAsync = async(info:Object) =>{
+    const url = "http://localhost:5000" + '/users/createuser';
 
     return fetch(url, {
 
