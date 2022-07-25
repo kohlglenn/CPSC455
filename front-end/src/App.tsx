@@ -22,7 +22,7 @@ function App() {
         <Route path ="/login" caseSensitive={false} element={<AccountLogin/>} />
         <Route path ="/createaccount" caseSensitive={false} element={<SimpleCreation/>} />
         <Route path ="/lobbyselection" caseSensitive={false} element={<LobbySelection/>} />
-        <Route path ="/lobbypage" caseSensitive={false} element={<LobbyPage participants={[]} newLobby={true} numberRestaurants={50}/>} />
+        <Route path ="/lobbypage" caseSensitive={false} element={<LobbyPage />} />
 
       </Routes>
     </Router>

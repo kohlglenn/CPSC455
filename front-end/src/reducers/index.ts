@@ -35,7 +35,7 @@ const lobbies = (lobbies: Lobby[] = [], action: Action) => {
 const rootReducer = combineReducers({ user, restaurants, lobbies });
 
 export interface ReduxState {
-  user: User | null;
+  user: User;
   restaurants: Restaurant[];
   lobbies: Lobby[];
 }

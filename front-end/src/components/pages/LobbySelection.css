@@ -65,7 +65,7 @@
 
 .lobby-selection-join-group-button {
     border: none;
-    background-color:rgb(228, 80, 80);
+    background-color:#719BCD;
     border-radius: 50px;
     font-size: 25px;
     font-weight: 600;
@@ -76,12 +76,12 @@
 }
 
 .lobby-selection-join-group-button:hover {
-    cursor:pointer;
+    cursor: pointer;
 }
 
 .lobby-selection-create-group-button {
     border: none;
-    background-color:rgb(228, 80, 80);
+    background-color: #719BCD;
     border-radius: 50px;
     font-size: 25px;
     font-weight: 600;

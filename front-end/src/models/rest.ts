@@ -75,13 +75,31 @@ export const addLobbyAsync = async (lobby: Object) => {
     return data;
 }
 
-export const updateNumberRestaurantsAsync = async (numRestaurants: Object) => {
-    const response = await fetch('http://localhost:5000/lobby', {
+export const addLobbyUsersAsync = async (user: Object) => {
+    const response = await fetch('http://localhost:5000/lobby/addUser', {
         method: 'PUT',
         headers: {
             'Content-Type': 'application/json'
         },
-        body: JSON.stringify(numRestaurants),
+        body: JSON.stringify(user),
+    })
+
+    const data = await response.json();
+    if (!response.ok) {
+        const errorMsg = data?.message;
+        throw new Error(errorMsg);
+    }
+
+    return data;
+}
+
+export const updateFiltersAsync = async (filters: Object) => {
+    const response = await fetch('http://localhost:5000/lobby/updateLobby', {
+        method: 'PUT',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(filters),
     })
 
     const data = await response.json();
