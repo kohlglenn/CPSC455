@@ -37,6 +37,9 @@ const LobbySchema = new mongoose.Schema(
     votes: {
       type: [Object],
     },
+    winner: {
+      type: Object,
+    }
   },
   { timestamps: true }
 );

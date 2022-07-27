@@ -38,6 +38,7 @@ export interface YelpBusinessSearchResponse {
 }
 
 export interface Lobby {
+  winner?: Restaurant;
   id: string;
   participants: User[];
   numberRestaurants: number;
@@ -66,3 +67,21 @@ export interface GoogleNearbyPlaceResponse {
   rating: number;
   user_ratings_total: number;
 }
+
+export interface Filters {
+  numberRestaurants: number;
+  distanceLow: number;
+  ratingLow: number;
+  priceLow: number;
+  reviewCountLow: number;
+  distanceHigh: number;
+  ratingHigh: number;
+  priceHigh: number;
+  reviewCountHigh: number;
+};
+
+export interface RestaurantQuery {
+  latitude: number;
+  longitude: number;
+  filters: Filters;
+};

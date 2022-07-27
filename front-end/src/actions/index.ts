@@ -15,10 +15,10 @@ export const setRestaurants = (restaurants: Restaurant[]) => {
   };
 };
 
-export const setLobbies = (lobbies: Lobby[]) => {
+export const setLobby = (lobby: Lobby) => {
   return {
-    type: "SET_LOBBIES",
-    payload: lobbies,
+    type: "SET_LOBBY",
+    payload: lobby,
   };
 };
 
