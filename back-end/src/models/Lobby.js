@@ -1,3 +1,4 @@
+// const User = require('./index');
 const mongoose = require("mongoose");
 
 const LobbySchema = new mongoose.Schema(
@@ -7,12 +8,28 @@ const LobbySchema = new mongoose.Schema(
       required: true,
     },
     participants: {
-      type: [String],
+      type: [Object],
       required: true,
     },
     numberRestaurants: {
       type: Number,
       required: true,
+    },
+    distance: {
+        type:[Number],
+        required: true,
+    },
+    price: {
+        type: [Number],
+        required: true,
+    },
+    rating: {
+      type: [Number],
+      required: true,  
+    },
+    reviewCount: {
+        type: [Number],
+        required: true,
     },
     restaurants: {
       type: [Object],

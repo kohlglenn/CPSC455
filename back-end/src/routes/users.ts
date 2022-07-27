@@ -24,7 +24,7 @@ router.post("/", async (req: Request, res: Response) => {
     const userID = req.params.user_id;
     const userToken = req.body.token;
     try {
-    let user = await queries.getUserByToken(userID, userToken);
+    let user = await queries.getUser(userID);
       res.send(user);
     } catch (error:any) {
       if (error.message === "Invalid Token")

@@ -18,6 +18,10 @@ router.post("/", async function (req, res, next) {
     id: req.body.id,
     participants: req.body.participants,
     numberRestaurants: req.body.numberRestaurants,
+    rating: req.body.rating,
+    distance: req.body.distance,
+    price: req.body.price,
+    reviewCount: req.body.reviewCount,
   });
   try {
     await recipe.save();
@@ -36,12 +40,21 @@ router.get("/:id", async function (req, res, next) {
   });
 });
 
-router.put("/", async function (req, res, next) {
+router.put("/updateLobby", async function (req, res, next) {
+    const filters = req.body.filters;
   await LobbyModel.update(
     { id: req.body.id },
-    { numberRestaurants: req.body.numRestaurants }
+    { numberRestaurants: filters.numberRestaurants, distance: filters.distance, rating: filters.rating, price: filters.price, reviewCount: filters.reviewCount }
   );
   res.send("updated");
 });
+
+router.put("/addUser", async function (req, res, next) {
+    await LobbyModel.update(
+      { id: req.body.id },
+      { $push: { participants: req.body.user } }
+    );
+    res.send("updated");
+  });
 
 module.exports = router;

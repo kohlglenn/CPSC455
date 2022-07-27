@@ -20,6 +20,10 @@ export interface Lobby {
   id: string;
   participants: User[];
   numberRestaurants: number;
+  rating: number[];
+  distance: number[];
+  price: number[];
+  reviewCount: number[];
   restaurants: Restaurant[];
   votes: Vote[];
 }
