@@ -1,12 +1,35 @@
 import fetch from "node-fetch";
+import { Filters, Lobby } from "../models";
 
-export const yelpApiQuery = (latitude: string, longitude: string) => {
+const priceLevelHelper = (low: number, high: number) => {
+  console.log(low);
+  console.log(high);
+  if (low <= high) {
+    let str = `${low}`;
+    low += 1;
+    while (low <= high) {
+      str += `,${low}`;
+      low += 1;
+      console.log(str);
+    }
+    return str;
+  } else {
+    return `${low}`;
+  }
+};
+
+export const yelpApiQuery = (latitude: string, longitude: string, filters: Filters) => {
+  const radius = String(filters.distanceHigh * 1000); // km to m
+  const price = priceLevelHelper(filters.priceLow, filters.priceHigh);
   const urlString =
     "https://api.yelp.com/v3/businesses/search?" +
     new URLSearchParams({
       latitude,
       longitude,
+      radius,
+      price
     });
+  console.log(urlString);
   const options = {
     method: "GET",
     headers: {
@@ -20,4 +43,26 @@ export const createToken = () => {
   const str1 = Math.random().toString(36).substring(2);
   const str2 = Math.random().toString(36).substring(2);
   return str1 + str2;
+};
+
+export const calculateBestRestaurant = (lobby: Lobby) => {
+  if (lobby.votes.length === lobby.participants.length * lobby.restaurants.length) {
+    const scores = lobby.votes.reduce((standings, vote) => {
+      const index = standings.findIndex(s => s.id === vote.restaurant_id);
+      switch (vote.vote){
+        case 'yes':
+          standings[index].score += 1;
+          break;
+        case 'no':
+        default:
+          break;
+      }
+      return standings;
+    }, lobby.restaurants.map(r => {
+      return {id: r.id, score: 0};
+    }));
+    const winner = scores.sort((a,b) => b.score - a.score)[0].id;
+    return lobby.restaurants.find(r => r.id === winner);
+  };
+  return undefined;
 };

@@ -23,21 +23,21 @@ const restaurants = (restaurants: Restaurant[] = [], action: Action) => {
   }
 };
 
-const lobbies = (lobbies: Lobby[] = [], action: Action) => {
+const lobby = (lobby: Lobby | null = null, action: Action) => {
   switch (action.type) {
-    case "SET_LOBBIES":
-      return [...action.payload];
+    case "SET_LOBBY":
+      return action.payload;
     default:
-      return lobbies;
+      return lobby;
   }
 }
 
-const rootReducer = combineReducers({ user, restaurants, lobbies });
+const rootReducer = combineReducers({ user, restaurants, lobby });
 
 export interface ReduxState {
   user: User;
   restaurants: Restaurant[];
-  lobbies: Lobby[];
+  lobby: Lobby;
 }
 
 export default rootReducer;

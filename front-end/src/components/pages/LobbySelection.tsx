@@ -3,7 +3,7 @@ import LayoutWithAppbar from '../layout/LayoutWithAppbar';
 import { useSelector, useDispatch } from 'react-redux';
 import { ReduxState } from '../../reducers';
 import { useNavigate } from "react-router-dom";
-import { setLobbies } from '../../actions';
+import { setLobby } from '../../actions';
 import { getLobbyAsync } from '../../models/rest';
 import { Lobby } from '../../models';
 import UserWidget from '../widgets/UserWidget';
@@ -15,7 +15,7 @@ import { addLobbyAsync, addLobbyUsersAsync } from '../../models/rest';
 import './LobbySelection.css';
 
 function LobbySelection() {
-    const lobbies = useSelector((state: ReduxState) => state.lobbies);
+    const lobby = useSelector((state: ReduxState) => state.lobby);
     const user = useSelector((state: ReduxState) => state.user);
     const [lobbyCode, setLobbyCode] = useState('');
 
@@ -23,7 +23,7 @@ function LobbySelection() {
     let navigate = useNavigate();
 
     useEffect(() => {
-        dispatch(setLobbies(lobbies));
+        dispatch(setLobby(lobby));
     }, []);
 
 
@@ -47,6 +47,7 @@ function LobbySelection() {
         }
         const lobby: Lobby = { id: roomCode, participants: [user], numberRestaurants: 9, rating: [0, 5], distance: [1, 10], price: [1, 4], reviewCount: [5, 1000], restaurants: [], votes: [] };
         addLobbyAsync(lobby);
+        dispatch(setLobby(lobby));
         navigate('/lobbypage', { state: { id: roomCode } });
     }
 

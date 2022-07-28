@@ -1,4 +1,6 @@
 import { Request, Router } from "express";
+import { Restaurant } from "../models";
+import { calculateBestRestaurant } from "./util";
 
 const LobbyModel = require("../models/Lobby");
 const mongoose = require("mongoose");
@@ -56,5 +58,34 @@ router.put("/addUser", async function (req, res, next) {
     );
     res.send("updated");
   });
+
+router.post("/restaurants", async function (req, res, next) {
+  const {id, restaurants} = req.body;
+  await LobbyModel.updateOne(
+    { id: id },
+    { restaurants }
+  );
+  const result = await LobbyModel.findOne({ id: id });
+  res.json(result);
+});
+
+router.post("/vote", async function (req, res, next) {
+  const {id, vote} = req.body;
+  await LobbyModel.updateOne(
+    { id: id },
+    { $push: { votes: vote } }
+  );
+  let result = await LobbyModel.findOne({ id: id });
+  const winner = calculateBestRestaurant(result);
+  if (winner) {
+    await LobbyModel.updateOne(
+      { id: id },
+      { winner }
+    );
+    result = await LobbyModel.findOne({ id: id });
+    console.log(result);
+  }
+  res.json(result);
+});
 
 module.exports = router;
