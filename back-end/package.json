@@ -19,9 +19,7 @@
     "mongoose": "^6.4.4",
     "node-fetch": "^2.6.7",
     "typescript": "^4.7.2",
-    "uuid": "^8.3.2"
-  },
-  "devDependencies": {
+    "uuid": "^8.3.2",
     "@types/body-parser": "^1.19.2",
     "@types/cors": "^2.8.12",
     "@types/dotenv": "^8.2.0",
@@ -30,5 +28,8 @@
     "@types/node-fetch": "^2.6.2",
     "nodemon": "^2.0.16",
     "ts-node": "^10.8.0"
+  },
+  "devDependencies": {
+
   }
 }
