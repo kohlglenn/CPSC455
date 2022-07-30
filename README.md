@@ -1,10 +1,10 @@
-# Insert Cool Website Name
+# Go2EAT
 
 Team PHP: Hilarious Programmers
 
 ## Project Description
 
-A crowdsourced (friendsourced) restaurant finder: Put a group of friends in a lobby together and have them vote yes/no on restuarants within X km. At the end, show the list that everyone voted yes on (or use some other metrics to determine a single winner).  
+Have you ever been out with a group of friends, and nobody can confidently decide a place to eat for everyone? Introducing a crowdsourced (friendsourced) restaurant finder: Put a group of friends in a lobby together and have them vote on restaurants within the vicinity. Based on the votes, a restaurant will be selected, and now everyone can finally eat! 
 
 **Who is it for?**: Friends who want to go out to eat but do not know where.  
 
