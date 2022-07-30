@@ -13,6 +13,8 @@ back-end/.env
 
 # production
 */build
+front-end/build
+back-end/build
 
 # misc
 */.DS_Store
