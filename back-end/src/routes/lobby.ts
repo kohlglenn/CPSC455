@@ -16,21 +16,22 @@ const router = Router();
 
 /* GET restaurants listing. */
 router.post("/", async function (req, res, next) {
-  const recipe = new LobbyModel({
+  const lobby = new LobbyModel({
     id: req.body.id,
     participants: req.body.participants,
+    host: req.body.host,
     numberRestaurants: req.body.numberRestaurants,
     rating: req.body.rating,
-    distance: req.body.distance,
+    distance: req.body.distance,        
     price: req.body.price,
     reviewCount: req.body.reviewCount,
   });
   try {
-    await recipe.save();
+    await lobby.save();
   } catch (err) {
     console.log(err);
   }
-  return res.send(recipe);
+  return res.send(lobby);
 });
 
 router.get("/:id", async function (req, res, next) {
