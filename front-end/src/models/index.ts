@@ -41,6 +41,7 @@ export interface Lobby {
   winner?: Restaurant;
   id: string;
   participants: User[];
+  host: User;
   numberRestaurants: number;
   rating: number[];
   distance: number[];

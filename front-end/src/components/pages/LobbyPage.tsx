@@ -10,8 +10,11 @@ import { useSelector, useDispatch } from 'react-redux';
 import { getLobbyAsync, getRestaurantsAsync, updateFiltersAsync, setRestaurantsAsync } from '../../models/rest';
 import { useNavigate } from "react-router-dom";
 import Snackbar from '@mui/material/Snackbar';
-import './LobbyPage.css'
+import CircularProgress from '@mui/material/CircularProgress';
+import UserWidget from '../widgets/UserWidget';
 import { setLobby } from '../../actions';
+
+import './LobbyPage.css'
 
 const lobbyToQueryObject = (lobby: Lobby, coords: {latitude: number, longitude: number}) => {
     const {latitude, longitude} = coords;
@@ -47,13 +50,18 @@ const restaurant: Restaurant = {
 
 export interface LobbyProps {
     id?: string;
+    isHost?: boolean;
 }
 function LobbyPage(props: LobbyProps) {
     const [lobbyID, setLobbyID] = useState((useLocation().state as LobbyProps).id);
+    const [isHost, setIsHost] = useState((useLocation().state as LobbyProps).isHost);
     const [lobbyUsers, setLobbyUsers] = useState<User[]>([]);
+    const [lobbyHost, setLobbyHost] = useState<User>();
     const [showFilters, setShowFilters] = useState(false);
     const [toastMsg, setToastMsg] = useState('');
     const lobby = useSelector((state: ReduxState) => state.lobby);
+    const user = useSelector((state: ReduxState) => state.user);
+
 
     const navigate = useNavigate();
     const dispatch = useDispatch();
@@ -61,7 +69,9 @@ function LobbyPage(props: LobbyProps) {
     useEffect(() => {
         getLobbyAsync(lobbyID!).then((res) => {
             if (res.length) {
+                setLobbyHost(res[0].host);  
                 setLobbyUsers(res[0].participants);
+                dispatch(setLobby(res[0]));
             } else {
                 console.log('lobby code not found');
             }
@@ -103,6 +113,8 @@ function LobbyPage(props: LobbyProps) {
     
     return (
         <LayoutWithAppbar>
+            <UserWidget></UserWidget>
+
             <div className='lobby-page'>
                 {showFilters && <LobbyFilters onFiltersSubmit={handleFiltersSubmit} lobbyID={lobbyID}></LobbyFilters>}
                 <div className='lobby-page-header'>
@@ -117,24 +129,30 @@ function LobbyPage(props: LobbyProps) {
                                 return (
                                     <div className='lobby-user'>
                                         <FontAwesomeIcon icon={solid('user')} size='3x' />
-                                       <div>{user.name}</div>
+                                       <div>{user.name}{user._id == lobbyHost?._id && <FontAwesomeIcon icon={solid('crown')}/>}</div>
                                     </div>
                                 )
                             })}
                         </div>
                     </div>
                     <div className='lobby-buttons'>
-                        <div className='lobby-room-code'>
+                        <div className={`lobby-room-code${isHost ? '-host' : ''}`}>
                             <span>Room Code:</span>
                             <span>{lobbyID}</span>
                         </div>
-                        <button className='lobby-settings-button' onClick={handleLobbySettingsClick}>Filters</button>
+                        {isHost && <button className='lobby-settings-button' onClick={handleLobbySettingsClick}>Filters</button>}
                     </div>
                 </div>
                 <hr className='lobby-page-divider'></hr>
-                <div className='lobby-page-footer'>
+                {isHost && <div className='lobby-page-footer'>
                     <button className='lobby-start-search-button' onClick={handleLobbyStart}>Start Search</button>
-                </div>
+                </div>}
+                {!isHost && 
+                <div className='lobby-page-waiting-message'>
+                    <span>Waiting for Host to start searching...</span>
+                    <br></br>
+                    <CircularProgress/>
+                </div>}
                 <Snackbar
                     open={!!toastMsg}
                     autoHideDuration={6000}

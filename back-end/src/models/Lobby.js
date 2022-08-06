@@ -11,6 +11,10 @@ const LobbySchema = new mongoose.Schema(
       type: [Object],
       required: true,
     },
+    host: {
+        type: Object,
+        required: true,
+    },  
     numberRestaurants: {
       type: Number,
       required: true,
