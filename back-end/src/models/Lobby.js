@@ -12,38 +12,40 @@ const LobbySchema = new mongoose.Schema(
       required: true,
     },
     host: {
-        type: Object,
-        required: true,
-    },  
+      type: Object,
+      required: true,
+    },
     numberRestaurants: {
       type: Number,
       required: true,
     },
     distance: {
-        type:[Number],
-        required: true,
+      type: [Number],
+      required: true,
     },
     price: {
-        type: [Number],
-        required: true,
+      type: [Number],
+      required: true,
     },
     rating: {
       type: [Number],
-      required: true,  
+      required: true,
     },
     reviewCount: {
-        type: [Number],
-        required: true,
+      type: [Number],
+      required: true,
     },
     restaurants: {
       type: [Object],
     },
     votes: {
       type: [Object],
+      required: true,
+      default: [],
     },
     winner: {
       type: Object,
-    }
+    },
   },
   { timestamps: true }
 );

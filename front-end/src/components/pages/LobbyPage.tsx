@@ -55,10 +55,10 @@ export interface LobbyProps {
 function LobbyPage(props: LobbyProps) {
     const [lobbyID, setLobbyID] = useState((useLocation().state as LobbyProps).id);
     const [isHost, setIsHost] = useState((useLocation().state as LobbyProps).isHost);
-    const [lobbyUsers, setLobbyUsers] = useState<User[]>([]);
     const [lobbyHost, setLobbyHost] = useState<User>();
     const [showFilters, setShowFilters] = useState(false);
     const [toastMsg, setToastMsg] = useState('');
+    const [isSearch, setIsSearch] = useState(false);
     const lobby = useSelector((state: ReduxState) => state.lobby);
     const user = useSelector((state: ReduxState) => state.user);
 
@@ -70,14 +70,29 @@ function LobbyPage(props: LobbyProps) {
         getLobbyAsync(lobbyID!).then((res) => {
             if (res.length) {
                 setLobbyHost(res[0].host);  
-                setLobbyUsers(res[0].participants);
                 dispatch(setLobby(res[0]));
             } else {
                 console.log('lobby code not found');
             }
         });
-        
     }, [])
+
+    useEffect(() => {
+        // Update the lobby every 2s, if we are not the host and the search has started, navigate to /selection
+        const interval = setInterval(() => {
+            getLobbyAsync(lobbyID!).then((res) => {
+                if (res.length && (lobby as any)?.updatedAt !== res[0]?.updatedAt) {
+                    dispatch(setLobby(res[0]));
+                }
+                
+                if (lobby.restaurants.length > 0 && lobbyID === lobby.id) {
+                    navigate("/selection");
+                }
+            });
+            }, 2000);
+        
+        return () => clearInterval(interval);
+    }, [lobby])
     
     const handleLobbySettingsClick = () => {
         setShowFilters(true);
@@ -94,18 +109,20 @@ function LobbyPage(props: LobbyProps) {
         if(!navigator.geolocation) {
             setToastMsg("Browser does not have geolocation.");
         } else {
+            setIsSearch(true);
             navigator.geolocation.getCurrentPosition(position => {
                 const query = lobbyToQueryObject(lobby, position.coords);
                 getRestaurantsAsync(query).then(restaurants => {
-                    const newLobby = {...lobby, restaurants: restaurants.businesses.map(yelpResponseToRestaurant)};
-                    dispatch(setLobby(newLobby));
-                    setRestaurantsAsync(newLobby.restaurants, newLobby.id);
-                    navigate("/selection");
+                    setRestaurantsAsync(restaurants.businesses.map(yelpResponseToRestaurant), lobby.id).then(newLobby => {
+                        dispatch(setLobby(newLobby));
+                    });
                 }).catch(err => {
+                    setIsSearch(false);
                     setToastMsg(`Error retrieving restaurants. ${err}`);
                 });
             },
             error => {
+                setIsSearch(false);
                 setToastMsg("Location must be enabled.");
             });
         }
@@ -125,7 +142,7 @@ function LobbyPage(props: LobbyProps) {
                     <div className='lobby-participants'>
                         <div>Participants</div>
                         <div className='lobby-participants-display'>
-                            {lobbyUsers!.map((user) => {
+                            {lobby && lobby.participants.map((user) => {
                                 return (
                                     <div className='lobby-user'>
                                         <FontAwesomeIcon icon={solid('user')} size='3x' />
@@ -146,6 +163,7 @@ function LobbyPage(props: LobbyProps) {
                 <hr className='lobby-page-divider'></hr>
                 {isHost && <div className='lobby-page-footer'>
                     <button className='lobby-start-search-button' onClick={handleLobbyStart}>Start Search</button>
+                    {isSearch && <CircularProgress sx={{marginTop: '13%'}}/>}
                 </div>}
                 {!isHost && 
                 <div className='lobby-page-waiting-message'>

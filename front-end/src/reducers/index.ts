@@ -1,7 +1,6 @@
 import { combineReducers } from "redux";
 import cookieHandler from "../models/userCookies";
 import { User, Action, Restaurant, Lobby } from "../models";
-import sampleLobbyData from '../SampleLobbyData.json';
 
 const user = (user: User | null = null, action: Action) => {
   switch (action.type) {
@@ -30,7 +29,7 @@ const lobby = (lobby: Lobby | null = null, action: Action) => {
     default:
       return lobby;
   }
-}
+};
 
 const rootReducer = combineReducers({ user, restaurants, lobby });
 
