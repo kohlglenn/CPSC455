@@ -1,5 +1,5 @@
 import fetch from "node-fetch";
-import { Filters, Lobby } from "../models";
+import { Filters, Lobby, User } from "../models";
 
 const priceLevelHelper = (low: number, high: number) => {
   console.log(low);
@@ -66,3 +66,16 @@ export const calculateBestRestaurant = (lobby: Lobby) => {
   };
   return undefined;
 };
+
+export const stripUser = (user: any)=>{
+  const newUser = {
+    _id: user._id,
+    name: user.name,
+    email: user.email,
+    upvotes: user.upvotes,
+    downvotes: user.downvotes,
+    restaurantHistory: user.restaurantHistory,
+    token: user.token,
+  }
+  return newUser;
+}
