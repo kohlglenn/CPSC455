@@ -11,6 +11,7 @@ export interface Restaurant {
   name: string;
   photos: string[];
   price_level?: string;
+  categories: {alias:string, title:string}[],
   rating: number;
   user_ratings_total: number;
   location: { latitude: number; longitude: number };

@@ -1,6 +1,7 @@
 import fetch from "node-fetch";
 import { Filters, Lobby, User } from "../models";
 
+const queries = require('../db/mongodb').queries;
 const priceLevelHelper = (low: number, high: number) => {
   console.log(low);
   console.log(high);
@@ -62,6 +63,7 @@ export const calculateBestRestaurant = (lobby: Lobby) => {
       return {id: r.id, score: 0};
     }));
     const winner = scores.sort((a,b) => b.score - a.score)[0].id;
+    updatePreferences(lobby);
     return lobby.restaurants.find(r => r.id === winner);
   };
   return undefined;
@@ -78,4 +80,31 @@ export const stripUser = (user: any)=>{
     token: user.token,
   }
   return newUser;
+}
+
+const updatePreferences = async (lobby: Lobby)=>{
+  const restaurants = new Map();
+  const users = new Map();
+
+  lobby.restaurants.forEach(restaurant =>{
+    restaurants.set(restaurant.id, restaurant);
+  });
+
+  await Promise.all(lobby.participants.map(async (participant) => {
+    const user = await queries.getUser(participant._id);
+    users.set(participant._id, user);
+  }));
+
+  lobby.votes.forEach(vote =>{
+    const restaurant = restaurants.get(vote.restaurant_id);
+    const user = users.get(vote.user_id);
+    restaurant.categories.forEach((category: { title: any; }) =>{
+      let userMap = (vote.vote === "yes") ? user.upvotes : user.downvotes;
+      userMap.set(category.title, (userMap.get(category.title) || 0) + 1 );
+    })
+  })
+  users.forEach((user, id)=>{
+    user.save();
+  })
+
 }

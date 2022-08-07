@@ -41,6 +41,7 @@ const restaurant: Restaurant = {
     name: result.name,
     photos: [result.image_url],
     price_level: result.price,
+    categories: result.categories,
     rating: result.rating,
     user_ratings_total: result.review_count,
     location: result.coordinates
