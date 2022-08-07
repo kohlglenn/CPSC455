@@ -22,7 +22,7 @@ router.post("/", async function (req, res, next) {
     host: req.body.host,
     numberRestaurants: req.body.numberRestaurants,
     rating: req.body.rating,
-    distance: req.body.distance,        
+    distance: req.body.distance,
     price: req.body.price,
     reviewCount: req.body.reviewCount,
   });
@@ -44,45 +44,42 @@ router.get("/:id", async function (req, res, next) {
 });
 
 router.put("/updateLobby", async function (req, res, next) {
-    const filters = req.body.filters;
+  const filters = req.body.filters;
   await LobbyModel.update(
     { id: req.body.id },
-    { numberRestaurants: filters.numberRestaurants, distance: filters.distance, rating: filters.rating, price: filters.price, reviewCount: filters.reviewCount }
+    {
+      numberRestaurants: filters.numberRestaurants,
+      distance: filters.distance,
+      rating: filters.rating,
+      price: filters.price,
+      reviewCount: filters.reviewCount,
+    }
   );
   res.send("updated");
 });
 
 router.put("/addUser", async function (req, res, next) {
-    await LobbyModel.update(
-      { id: req.body.id },
-      { $push: { participants: req.body.user } }
-    );
-    res.send("updated");
-  });
+  await LobbyModel.update(
+    { id: req.body.id },
+    { $push: { participants: req.body.user } }
+  );
+  res.send("updated");
+});
 
 router.post("/restaurants", async function (req, res, next) {
-  const {id, restaurants} = req.body;
-  await LobbyModel.updateOne(
-    { id: id },
-    { restaurants }
-  );
+  const { id, restaurants } = req.body;
+  await LobbyModel.updateOne({ id: id }, { restaurants });
   const result = await LobbyModel.findOne({ id: id });
   res.json(result);
 });
 
 router.post("/vote", async function (req, res, next) {
-  const {id, vote} = req.body;
-  await LobbyModel.updateOne(
-    { id: id },
-    { $push: { votes: vote } }
-  );
+  const { id, vote } = req.body;
+  await LobbyModel.updateOne({ id: id }, { $push: { votes: vote } });
   let result = await LobbyModel.findOne({ id: id });
   const winner = calculateBestRestaurant(result);
   if (winner) {
-    await LobbyModel.updateOne(
-      { id: id },
-      { winner }
-    );
+    await LobbyModel.updateOne({ id: id }, { winner });
     result = await LobbyModel.findOne({ id: id });
     console.log(result);
   }
