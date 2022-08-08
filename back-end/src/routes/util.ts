@@ -1,5 +1,5 @@
 import fetch from "node-fetch";
-import { Filters, Lobby, User } from "../models";
+import { Filters, Lobby, User , Restaurant} from "../models";
 
 const queries = require('../db/mongodb').queries;
 const priceLevelHelper = (low: number, high: number) => {
@@ -63,14 +63,15 @@ export const calculateBestRestaurant = (lobby: Lobby) => {
       return {id: r.id, score: 0};
     }));
     const winner = scores.sort((a,b) => b.score - a.score)[0].id;
-    updatePreferences(lobby);
-    return lobby.restaurants.find(r => r.id === winner);
+    const winnerRestaurant = lobby.restaurants.find(r => r.id === winner)
+    updatePreferences(lobby, winnerRestaurant);
+    return winnerRestaurant;
   };
   return undefined;
 };
 
-export const stripUser = (user: any)=>{
-  const newUser = {
+export const stripUser = (user: User)=>{
+  const newUser:User = {
     _id: user._id,
     name: user.name,
     email: user.email,
@@ -79,10 +80,11 @@ export const stripUser = (user: any)=>{
     restaurantHistory: user.restaurantHistory,
     token: user.token,
   }
+  console.log(newUser.upvotes);
   return newUser;
 }
 
-const updatePreferences = async (lobby: Lobby)=>{
+const updatePreferences = async (lobby: Lobby, winnerRestaurant: any)=>{
   const restaurants = new Map();
   const users = new Map();
 
@@ -104,6 +106,7 @@ const updatePreferences = async (lobby: Lobby)=>{
     })
   })
   users.forEach((user, id)=>{
+    user.restaurantHistory.push(winnerRestaurant);
     user.save();
   })
 

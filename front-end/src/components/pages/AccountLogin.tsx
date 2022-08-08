@@ -23,7 +23,7 @@ import { setUser } from '../../actions';
 import { User } from '../../models';
 import { ReduxState } from '../../reducers';
 import { useEffect } from 'react';
-import { Navigate } from 'react-router';
+import { Navigate, useNavigate } from 'react-router';
 import UserWidget from '../widgets/UserWidget';
 
 function Copyright(props: any) {
@@ -42,8 +42,11 @@ function Copyright(props: any) {
 
 const theme = createTheme();
 export default function AccountLogin() {
-
+  const navigate = useNavigate();
   const user = useSelector((state: ReduxState) => state.user);
+  if (user !== null) {
+    navigate("/");
+  }
   const dispatch = useDispatch();
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -59,12 +62,7 @@ export default function AccountLogin() {
         });
       }
     });
-    console.log(user);
   };
-
-  if (user !== null){
-    return <Navigate to = "/" />;
-  }
   return (
     <LayoutWithAppbar>
     <UserWidget/>

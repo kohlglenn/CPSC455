@@ -4,6 +4,10 @@ export interface User {
   name: string;
   email: string;
   profileUrl?: string;
+  upvotes: Map<string, number>,
+  downvotes: Map<string, number>,
+  restaurantHistory: [],
+  token: String,
 }
 
 export interface Restaurant {

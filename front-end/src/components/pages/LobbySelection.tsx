@@ -37,13 +37,13 @@ function LobbySelection() {
             } else {
                 setShowError(true);
             }
-        });       
+        });
     }
 
     const handleCreateLobbyClicked = () => {
         var roomCode = "";
         var letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
-            
+
         for (var i = 0; i < 4; i++) {
             roomCode += letters.charAt(Math.random() * letters.length);
         }
@@ -63,11 +63,11 @@ function LobbySelection() {
                     <span className='lobby-selection-header'>
                         Join a Lobby:
                     </span>
-                    <input type="text" id="lobby-code" className='lobby-code-input' value={lobbyCode} onChange={(e) => {setLobbyCode(e.target.value)}} placeholder='ENTER 4-LETTER CODE' ></input>
+                    <input type="text" id="lobby-code" className='lobby-code-input' value={lobbyCode} onChange={(e) => { setLobbyCode(e.target.value) }} placeholder='ENTER 4-LETTER CODE' ></input>
                     <button className='lobby-selection-join-group-button' onClick={() => handleJoinLobbyClicked()}>ENTER</button>
 
                 </div>
-                
+
                 <div className='lobby-selection-footer'>
                     <span className='lobby-selection-footer-text'>Don't have a lobby yet?</span>
                     <button className='lobby-selection-create-group-button' onClick={() => handleCreateLobbyClicked()}>Create a Lobby</button>
@@ -75,7 +75,7 @@ function LobbySelection() {
                 <Snackbar
                     open={showError}
                     autoHideDuration={6000}
-                    onClose={() => {setShowError(false)}}
+                    onClose={() => { setShowError(false) }}
                     message="Room not found."
                 />
             </div>

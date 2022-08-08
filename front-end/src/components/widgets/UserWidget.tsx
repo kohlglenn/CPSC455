@@ -1,10 +1,11 @@
 
 import { ReduxState } from '../../reducers';
 import { useDispatch, useSelector } from 'react-redux';
-import { useEffect } from 'react';
+import { useEffect, useLayoutEffect } from 'react';
 import { getUserAsync } from '../../models/rest';
 import { setUser } from '../../actions';
 import { User } from '../../models';
+import { useLocation, useNavigate } from 'react-router';
 
 
 export default function UserWidget(props: any) {
@@ -15,13 +16,13 @@ export default function UserWidget(props: any) {
         if (!user) {
             getUserAsync().then((res: Response) => {
                 if (res.ok) {
-                    return res.json().then((user: User) => {
+                    res.json().then((user: User) => {
                         dispatch(setUser(user));
                     });
                 }
             });
         }
-    }, []);
+    }, [user]);
     return (
         <div>
         </div>
