@@ -16,8 +16,8 @@ import { setLobby } from '../../actions';
 
 import './LobbyPage.css'
 
-const lobbyToQueryObject = (lobby: Lobby, coords: { latitude: number, longitude: number }) => {
-    const { latitude, longitude } = coords;
+const lobbyToQueryObject = (lobby: Lobby, coords: {latitude: number, longitude: number}) => {
+    const {latitude, longitude} = coords;
     return {
         latitude,
         longitude,
@@ -36,15 +36,15 @@ const lobbyToQueryObject = (lobby: Lobby, coords: { latitude: number, longitude:
 };
 
 const yelpResponseToRestaurant = (result: YelpBusinessSearchResponse) => {
-    const restaurant: Restaurant = {
-        id: result.id as string,
-        name: result.name,
-        photos: [result.image_url],
-        price_level: result.price,
-        categories: result.categories,
-        rating: result.rating,
-        user_ratings_total: result.review_count,
-        location: result.coordinates
+const restaurant: Restaurant = {
+    id: result.id as string,
+    name: result.name,
+    photos: [result.image_url],
+    categories: result.categories,
+    price_level: result.price,
+    rating: result.rating,
+    user_ratings_total: result.review_count,
+    location: result.coordinates
     };
     return restaurant;
 }
@@ -64,20 +64,13 @@ function LobbyPage(props: LobbyProps) {
     const user = useSelector((state: ReduxState) => state.user);
 
 
-    const dispatch = useDispatch();
     const navigate = useNavigate();
-    useEffect(() => {
-        if (user === null) {
-            navigate("/");
-        }
-    }, []);
-    if (user === null) {
-        navigate("/");
-    }
+    const dispatch = useDispatch();
+
     useEffect(() => {
         getLobbyAsync(lobbyID!).then((res) => {
             if (res.length) {
-                setLobbyHost(res[0].host);
+                setLobbyHost(res[0].host);  
                 dispatch(setLobby(res[0]));
             } else {
                 console.log('lobby code not found');
@@ -92,29 +85,29 @@ function LobbyPage(props: LobbyProps) {
                 if (res.length && (lobby as any)?.updatedAt !== res[0]?.updatedAt) {
                     dispatch(setLobby(res[0]));
                 }
-
+                
                 if (lobby.restaurants.length > 0 && lobbyID === lobby.id) {
                     navigate("/selection");
                 }
             });
-        }, 2000);
-
+            }, 2000);
+        
         return () => clearInterval(interval);
     }, [lobby])
-
+    
     const handleLobbySettingsClick = () => {
         setShowFilters(true);
     }
 
     const handleFiltersSubmit = (filters: Object) => {
         updateFiltersAsync({ id: lobbyID, filters: filters });
-        const newLobby = { ...lobby, ...filters };
+        const newLobby = {...lobby, ...filters};
         dispatch(setLobby(newLobby));
         setShowFilters(false);
     }
 
     const handleLobbyStart = () => {
-        if (!navigator.geolocation) {
+        if(!navigator.geolocation) {
             setToastMsg("Browser does not have geolocation.");
         } else {
             setIsSearch(true);
@@ -129,15 +122,16 @@ function LobbyPage(props: LobbyProps) {
                     setToastMsg(`Error retrieving restaurants. ${err}`);
                 });
             },
-                error => {
-                    setIsSearch(false);
-                    setToastMsg("Location must be enabled.");
-                });
+            error => {
+                setIsSearch(false);
+                setToastMsg("Location must be enabled.");
+            });
         }
     }
-
+    
     return (
         <LayoutWithAppbar>
+            <UserWidget></UserWidget>
 
             <div className='lobby-page'>
                 {showFilters && <LobbyFilters onFiltersSubmit={handleFiltersSubmit} lobbyID={lobbyID}></LobbyFilters>}
@@ -153,7 +147,7 @@ function LobbyPage(props: LobbyProps) {
                                 return (
                                     <div className='lobby-user'>
                                         <FontAwesomeIcon icon={solid('user')} size='3x' />
-                                        <div>{user.name}{user._id == lobbyHost?._id && <FontAwesomeIcon icon={solid('crown')} />}</div>
+                                       <div>{user.name}{user._id == lobbyHost?._id && <FontAwesomeIcon icon={solid('crown')}/>}</div>
                                     </div>
                                 )
                             })}
@@ -170,18 +164,18 @@ function LobbyPage(props: LobbyProps) {
                 <hr className='lobby-page-divider'></hr>
                 {isHost && <div className='lobby-page-footer'>
                     <button className='lobby-start-search-button' onClick={handleLobbyStart}>Start Search</button>
-                    {isSearch && <CircularProgress sx={{ marginTop: '13%' }} />}
+                    {isSearch && <CircularProgress sx={{marginTop: '13%'}}/>}
                 </div>}
-                {!isHost &&
-                    <div className='lobby-page-waiting-message'>
-                        <span>Waiting for Host to start searching...</span>
-                        <br></br>
-                        <CircularProgress />
-                    </div>}
+                {!isHost && 
+                <div className='lobby-page-waiting-message'>
+                    <span>Waiting for Host to start searching...</span>
+                    <br></br>
+                    <CircularProgress/>
+                </div>}
                 <Snackbar
                     open={!!toastMsg}
                     autoHideDuration={6000}
-                    onClose={() => { setToastMsg('') }}
+                    onClose={() => {setToastMsg('')}}
                     message={toastMsg}
                 />
             </div>
