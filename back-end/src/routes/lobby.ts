@@ -50,6 +50,7 @@ router.put("/updateLobby", async function (req, res, next) {
     {
       numberRestaurants: filters.numberRestaurants,
       distance: filters.distance,
+      categories: filters.categories,
       rating: filters.rating,
       price: filters.price,
       reviewCount: filters.reviewCount,

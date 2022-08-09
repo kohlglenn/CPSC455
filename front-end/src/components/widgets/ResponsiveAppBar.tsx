@@ -13,7 +13,7 @@ import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
 import MenuIcon from '@mui/icons-material/Menu';
 
-import {useDispatch, useSelector} from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { ReduxState } from '../../reducers';
 
 import userCookies from '../../models/userCookies';
@@ -23,8 +23,8 @@ import { getUserAsync } from '../../models/rest';
 import { User } from '../../models';
 import logo from "../../horizontal_logo.png";
 
-const pages = ['Products', 'Pricing', 'Blog'];
-const settings = ['Profile', 'Account', 'Dashboard', 'Logout', "Admin"];
+const pages = ['Home'];
+const settings = ['Profile', 'Account', 'Logout'];
 
 const ResponsiveAppBar = () => {
   const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(null);
@@ -41,28 +41,23 @@ const ResponsiveAppBar = () => {
     setAnchorElUser(event.currentTarget);
   };
 
-  const handleCloseNavMenu = () => {
+  const handleCloseNavMenu = (event: any) => {
+    switch (event.currentTarget.id) {
+      case "Home":
+        navigate('/');
+        break;
+    }
     setAnchorElNav(null);
   };
 
-  const handleCloseUserMenu = (event:any) => {
-    switch(event.currentTarget.id){
+  const handleCloseUserMenu = (event: any) => {
+    switch (event.currentTarget.id) {
       case "Profile":
-        navigate('/account')
+        navigate('/account');
         break;
       case "Logout":
         userCookies.logout();
         dispatch(setUser(null));
-        break;
-      case "Admin":
-        userCookies.storeUser("62d5c5ea8df340593d114457");
-        getUserAsync().then((res: Response) => {
-          if (res.ok) {
-            return res.json().then((user: User) => {
-              dispatch(setUser(user));
-            });
-          }
-        });
         break;
     }
     setAnchorElUser(null);
@@ -72,7 +67,7 @@ const ResponsiveAppBar = () => {
     <AppBar position="static">
       <Container maxWidth="xl">
         <Toolbar disableGutters>
-        <img src={logo} className="icon-md"/>
+          <img src={logo} className="icon-md" />
 
           <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
             <IconButton
@@ -104,13 +99,13 @@ const ResponsiveAppBar = () => {
               }}
             >
               {pages.map((page) => (
-                <MenuItem key={page} onClick={handleCloseNavMenu}>
+                <MenuItem key={page} id={page} onClick={handleCloseNavMenu}>
                   <Typography textAlign="center">{page}</Typography>
                 </MenuItem>
               ))}
             </Menu>
           </Box>
-          <img src={logo} className="icon-xs"/>
+          <img src={logo} className="icon-xs" />
           <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
             {pages.map((page) => (
               <Button
@@ -146,7 +141,7 @@ const ResponsiveAppBar = () => {
               onClose={handleCloseUserMenu}
             >
               {settings.map((setting) => (
-                <MenuItem key={setting} id = {setting} onClick={handleCloseUserMenu}>
+                <MenuItem key={setting} id={setting} onClick={handleCloseUserMenu}>
                   <Typography textAlign="center">{setting}</Typography>
                 </MenuItem>
               ))}

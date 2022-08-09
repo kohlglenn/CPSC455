@@ -4,6 +4,10 @@ export interface User {
   name: string;
   email: string;
   profileUrl?: string;
+  upvotes: Map<string, number>,
+  downvotes: Map<string, number>,
+  restaurantHistory: [],
+  token: String,
 }
 
 export interface Restaurant {
@@ -11,6 +15,7 @@ export interface Restaurant {
   name: string;
   photos: string[];
   price_level?: string;
+  categories: {alias:string, title:string}[],
   rating: number;
   user_ratings_total: number;
   location: { latitude: number; longitude: number };

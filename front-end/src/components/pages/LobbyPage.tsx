@@ -40,6 +40,7 @@ const restaurant: Restaurant = {
     id: result.id as string,
     name: result.name,
     photos: [result.image_url],
+    categories: result.categories,
     price_level: result.price,
     rating: result.rating,
     user_ratings_total: result.review_count,

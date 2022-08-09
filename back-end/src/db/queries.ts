@@ -4,6 +4,9 @@ import { createToken } from "../routes/util";
 const Users = require('./schemas');
 const mongoose = require('mongoose');
 
+const bcrypt = require('bcryptjs');
+const rounds = 10;
+
 const callback = console.log();
 
 const queries = {
@@ -17,11 +20,12 @@ const queries = {
         return user;
     },
 
-    addUser: async function (name:string, email:string, passwordHash:string){
+    addUser: async function (name:string, email:string, password:string){
+        const hash = await bcrypt.hash(password, rounds)
         const newUser = new Users({
             name: name,
             email: email,
-            passwordHash: passwordHash,
+            passwordHash: hash,
             upvotes: new Map(),
             downvotes: new Map(),
             restaurantHistory: [],
@@ -37,10 +41,10 @@ const queries = {
         return user;
     },
 
-    authenticateUser: async function(email:string, passwordHash:string){
+    authenticateUser: async function(email:string, password:string){
         const user = await Users.findOne({email:email});
-        console.log(user);
-        if (passwordHash === user.passwordHash){
+        const checkUser = await bcrypt.compare(password, user.passwordHash);
+        if (checkUser){
             user.token = createToken();
             user.lastlogin = Date.now();
             user.save()
