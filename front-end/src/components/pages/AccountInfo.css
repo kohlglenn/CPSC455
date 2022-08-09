@@ -1,0 +1,23 @@
+@font-face {
+  font-family: 'Logo Font';
+  src: URL('../../fonts/overmch.ttf') format('truetype');
+}
+
+.container {
+  text-align: center;
+}
+
+#logout {
+  background-color: #719BCD;
+}
+
+.go2eat-button {
+  border: none;
+  background-color: #719BCD;
+  border-radius: 50px;
+  font-size: 25px;
+  font-weight: 600;
+  color: white;
+  height: 40px;
+  width: max(70%, 125px);
+}

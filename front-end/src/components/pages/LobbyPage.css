@@ -91,7 +91,7 @@
     font-weight: 600;
     color: white;
     height: 40px;
-    width: 60%;
+    width: max(60%, 100px);
     margin-top: 13%;
     cursor: pointer;
 }

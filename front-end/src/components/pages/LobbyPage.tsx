@@ -163,7 +163,7 @@ function LobbyPage(props: LobbyProps) {
                 </div>
                 <hr className='lobby-page-divider'></hr>
                 {isHost && <div className='lobby-page-footer'>
-                    <button className='lobby-start-search-button' onClick={handleLobbyStart}>Start Search</button>
+                    <button className='lobby-start-search-button' id='start-search-button' onClick={handleLobbyStart}>Start Search</button>
                     {isSearch && <CircularProgress sx={{marginTop: '13%'}}/>}
                 </div>}
                 {!isHost &&
