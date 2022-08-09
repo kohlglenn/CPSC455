@@ -13,7 +13,7 @@ import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
 import MenuIcon from '@mui/icons-material/Menu';
 
-import {useDispatch, useSelector} from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { ReduxState } from '../../reducers';
 
 import userCookies from '../../models/userCookies';
@@ -45,8 +45,12 @@ const ResponsiveAppBar = () => {
     setAnchorElUser(event.currentTarget);
   };
 
-  const handleCloseNavMenu = (event:any) => {
-    console.log(event.currentTarget.id);
+  const handleCloseNavMenu = (event: any) => {
+    switch (event.currentTarget.id) {
+      case "Home":
+        navigate('/');
+        break;
+    }
     setAnchorElNav(null);
     switch(event.currentTarget.id) {
       case "Home":
@@ -61,25 +65,15 @@ const ResponsiveAppBar = () => {
     }
   };
 
-  const handleCloseUserMenu = (event:any) => {
-    switch(event.currentTarget.id){
+  const handleCloseUserMenu = (event: any) => {
+    switch (event.currentTarget.id) {
       case "Profile":
-        navigate('/account')
+        navigate('/account');
         break;
       case "Logout":
         userCookies.logout();
         navigate('/');
         dispatch(setUser(null));
-        break;
-      case "Admin":
-        userCookies.storeUser("62d5c5ea8df340593d114457");
-        getUserAsync().then((res: Response) => {
-          if (res.ok) {
-            return res.json().then((user: User) => {
-              dispatch(setUser(user));
-            });
-          }
-        });
         break;
     }
     setAnchorElUser(null);
@@ -89,7 +83,7 @@ const ResponsiveAppBar = () => {
     <AppBar position="static" id="toplevel-appbar">
       <Container maxWidth="xl">
         <Toolbar disableGutters>
-        <img src={logo} className="icon-md"/>
+          <img src={logo} className="icon-md" />
 
           <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
             <IconButton
@@ -127,7 +121,7 @@ const ResponsiveAppBar = () => {
               ))}
             </Menu>
           </Box>
-          <img src={logo} className="icon-xs"/>
+          <img src={logo} className="icon-xs" />
           <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
             {pages.map((page) => (
               <Button
@@ -164,7 +158,7 @@ const ResponsiveAppBar = () => {
               onClose={handleCloseUserMenu}
             >
               {settings.map((setting) => (
-                <MenuItem key={setting} id = {setting} onClick={handleCloseUserMenu}>
+                <MenuItem key={setting} id={setting} onClick={handleCloseUserMenu}>
                   <Typography textAlign="center">{setting}</Typography>
                 </MenuItem>
               ))}
