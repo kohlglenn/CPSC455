@@ -11,6 +11,7 @@ import { useSelector } from 'react-redux';
 import { ReduxState } from '../../reducers';
 import { Vote } from '../../models';
 import { addVoteAsync } from '../../models/rest';
+import Rating from '@mui/material/Rating';
 
 export interface Props {
   img: string;
@@ -50,9 +51,12 @@ export default function MediaCard(props: any) {
           <Typography gutterBottom variant="h5" component="div">
             {name}
           </Typography>
-          <Typography variant="body2" color="text.secondary">
-            {`Rating: ${rating} by ${numRating} users`}
-          </Typography>
+          <span style={{display: "inline-flex", alignItems: "center"}}>
+            <Rating name="read-only" value={rating} precision={0.1} readOnly />
+            <Typography variant="body2" color="text.secondary">
+              {`by ${numRating} users`}
+            </Typography>
+          </span>
         </CardContent>
       </Card>
       <div className="card-button-container">
