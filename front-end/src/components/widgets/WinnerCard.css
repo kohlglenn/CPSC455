@@ -1,0 +1,23 @@
+.standard-button:hover {
+    cursor: pointer;
+}
+
+.standard-button {
+    border: none;
+    background-color: #719BCD;
+    border-radius: 50px;
+    font-size: 25px;
+    font-weight: 600;
+    color: white;
+    height: 40px;
+    width: 70%;
+    margin-bottom: 16px;
+}
+
+.winner-card-wrapper {
+    border: 1px solid red;
+    display: flex;
+    flex-flow: column nowrap;
+    align-items: center;
+    justify-content: center;
+}

@@ -8,6 +8,8 @@ import { setLobby, setRestaurants } from '../../actions';
 import RestaurantCard, { Props } from '../widgets/RestaurantCard';
 import { getLobbyAsync } from '../../models/rest';
 import WinnerCard from '../widgets/WinnerCard';
+import Typography from '@mui/material/Typography';
+import CircularProgress from '@mui/material/CircularProgress';
 
 function Selection() {
   const restaurants = useSelector((state: ReduxState) => state.lobby.restaurants);
@@ -62,8 +64,15 @@ function Selection() {
             <RestaurantCard {...rProps} />
           );
         })[index]
-        : "Calculating..."
-        : "Loading..."}
+        : <div>
+        <Typography variant="body1" sx={{marginTop: "16px"}}>{"Calculating..."}</Typography>
+        <CircularProgress/>
+      </div>
+        : <div>
+            <Typography variant="body1" sx={{marginTop: "16px"}}>{"Loading..."}</Typography>
+            <br></br>
+            <CircularProgress/>
+          </div>}
     </LayoutWithAppbar>
   );
 }
