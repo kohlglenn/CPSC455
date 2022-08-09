@@ -23,8 +23,12 @@ import { getUserAsync } from '../../models/rest';
 import { User } from '../../models';
 import logo from "../../horizontal_logo.png";
 
-const pages = ['Products', 'Pricing', 'Blog'];
-const settings = ['Profile', 'Account', 'Dashboard', 'Logout', "Admin"];
+const pages = ['Home', 'Sign Up', 'Log In'];
+const settings = ['Profile', 'Logout', 'Admin']
+/*
+old params, re-add as needed
+['Profile', 'Account', 'Dashboard', 'Logout', "Admin"];
+*/
 
 const ResponsiveAppBar = () => {
   const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(null);
@@ -41,8 +45,20 @@ const ResponsiveAppBar = () => {
     setAnchorElUser(event.currentTarget);
   };
 
-  const handleCloseNavMenu = () => {
+  const handleCloseNavMenu = (event:any) => {
+    console.log(event.currentTarget.id);
     setAnchorElNav(null);
+    switch(event.currentTarget.id) {
+      case "Home":
+        navigate('/')
+        break;
+      case "Sign Up":
+        navigate('/createaccount');
+        break;
+      case "Log In":
+        navigate('/login');
+        break;
+    }
   };
 
   const handleCloseUserMenu = (event:any) => {
@@ -52,6 +68,7 @@ const ResponsiveAppBar = () => {
         break;
       case "Logout":
         userCookies.logout();
+        navigate('/');
         dispatch(setUser(null));
         break;
       case "Admin":
@@ -69,7 +86,7 @@ const ResponsiveAppBar = () => {
   };
 
   return (
-    <AppBar position="static">
+    <AppBar position="static" id="toplevel-appbar">
       <Container maxWidth="xl">
         <Toolbar disableGutters>
         <img src={logo} className="icon-md"/>
@@ -104,7 +121,7 @@ const ResponsiveAppBar = () => {
               }}
             >
               {pages.map((page) => (
-                <MenuItem key={page} onClick={handleCloseNavMenu}>
+                <MenuItem key={page} id={page} onClick={handleCloseNavMenu}>
                   <Typography textAlign="center">{page}</Typography>
                 </MenuItem>
               ))}
@@ -115,6 +132,7 @@ const ResponsiveAppBar = () => {
             {pages.map((page) => (
               <Button
                 key={page}
+                id={page}
                 onClick={handleCloseNavMenu}
                 sx={{ my: 2, color: 'white', display: 'block' }}
               >

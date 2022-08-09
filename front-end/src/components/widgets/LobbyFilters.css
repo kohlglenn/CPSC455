@@ -21,7 +21,7 @@
     display:flex;
     flex-direction: column;
 }
-.modal-header { 
+.modal-header {
     height: 10%;
     display: flex;
     justify-content: center;
@@ -55,10 +55,14 @@
 .number-restaurants-setting {
     height: 28%;
 }
+
 .other-filters {
     height: 72%;
     display: flex;
     flex-direction: column;
+}
+.other-filters-text {
+    margin-top: 10px;
 }
 
 .lobby-filters-submit-button {

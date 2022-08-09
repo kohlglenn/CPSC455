@@ -30,8 +30,8 @@ function Copyright(props: any) {
   return (
     <Typography variant="body2" color="text.secondary" align="center" {...props}>
       {'Copyright © '}
-      <Link color="inherit" href="https://mui.com/">
-        Your Website
+      <Link color="inherit" href="https://github.com/kohlglenn/CPSC455/graphs/contributors">
+        Go2Eat Team
       </Link>{' '}
       {new Date().getFullYear()}
       {'.'}
@@ -63,7 +63,7 @@ export default function AccountLogin() {
   };
 
   if (user !== null){
-    return <Navigate to = "/" />;
+    return <Navigate to = "/account" />;
   }
   return (
     <LayoutWithAppbar>
@@ -115,12 +115,15 @@ export default function AccountLogin() {
             </Button>
             <Grid container>
               <Grid item xs>
+                {/*
                 <Link href="#" variant="body2">
                   Forgot password?
                 </Link>
+                deprecated, unless feature added later
+                */}
               </Grid>
               <Grid item>
-                <Link href="#" variant="body2">
+                <Link href="/createaccount" variant="body2">
                   {"Don't have an account? Sign Up"}
                 </Link>
               </Grid>

@@ -1,3 +1,17 @@
+@font-face {
+  font-family: 'Logo Font';
+  src: URL('../../fonts/overmch.ttf') format('truetype');
+}
+
+#about-modal {
+    width: 80%;
+}
+
+.modal-title {
+  font-size: 38px;
+  font-family: "Logo Font";
+}
+
 .modal{
     position:fixed;
     left:0;
@@ -5,7 +19,7 @@
     right:0;
     bottom:0;
     display:flex;
-    background-color: rgba(0,0,0,0.5);
+    background-color: rgba(0,0,0,0.3);
     align-items: center;
     justify-content: center;
 }
@@ -13,7 +27,8 @@
     text-align:center;
     background-color: rgb(214, 214, 214);
     margin:auto;
-    width:80%;
+    width: 80%;
+    min-width: 240px;
     border: 2px solid black;
     border-radius: 5px;
     white-space: pre-wrap;
@@ -22,8 +37,9 @@
     flex-direction: column;
 }
 .modal-body{
-    max-height:80%;
+    font-size: 16px;
     overflow-y: scroll;
+    margin-bottom: 10px;
 }
 .landing-image{
     margin:5em;

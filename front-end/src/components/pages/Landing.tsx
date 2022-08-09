@@ -4,6 +4,7 @@ import LayoutWithAppbar from '../layout/LayoutWithAppbar';
 import './Landing.css'
 
 import { useDispatch, useSelector } from 'react-redux';
+import { useNavigate } from 'react-router';
 import { ReduxState } from '../../reducers';
 
 import { setUser } from '../../actions';
@@ -17,6 +18,8 @@ function Landing() {
 
   const user = useSelector((state: ReduxState) => state.user);
   const dispatch = useDispatch();
+  const navigate = useNavigate();
+
 /*
   useEffect(() => {
     /*if (!user) {
@@ -55,28 +58,30 @@ function Landing() {
   }
 
   const handleCreateClick = () => {
-
+    navigate('/login');
   }
 
   return (
     <LayoutWithAppbar>
       <UserWidget/>
-      <div className="landing-page">
-        <div className="landing-content">
-          <h1 className="landing-title">Go2Eat</h1>
-          <h2>Looking for a restaurant?</h2>
-          <h3>We can help!</h3>
-          <h3>go2eat is a tool designed to help you choose a local <br /> restaurant for a meal, whether in a group or by yourself!</h3>
+      <div id='toplevel'>
+        <p className="landing-title">Welcome to Go2Eat</p>
+        <div className="landing-page">
+          <div className="landing-content">
+            <h2>Looking for a restaurant?</h2>
+            <h3>We can help!</h3>
+            <h3>go2eat is a tool designed to help you choose a local <br /> restaurant for a meal, whether in a group or by yourself!</h3>
 
-          <div className="landing-buttons">
-            <button className="about-page-button" onClick={() => { toggleAbout() }}>See how it works!</button><br />
-            <button className="create-account-button" onClick={() => { handleCreateClick() }}>Create Account</button>
+            <div className="landing-buttons">
+              <button className="about-page-button" onClick={() => { toggleAbout() }}>See how it works!</button><br />
+              <button className="create-account-button" onClick={() => { handleCreateClick() }}>Create Account</button>
+            </div>
           </div>
-        </div>
-
+            <div className="image-container">
+              <img className="landing-image" src={require("./../../logo.png")} />
+            </div>
         <AboutPage show={isAboutVisible} closer={toggleAbout} />
-
-        <img className="landing-image" src={require("./../../logo.png")} />
+        </div>
       </div>
 
     </LayoutWithAppbar>

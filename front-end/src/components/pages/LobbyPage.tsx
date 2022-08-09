@@ -69,7 +69,7 @@ function LobbyPage(props: LobbyProps) {
     useEffect(() => {
         getLobbyAsync(lobbyID!).then((res) => {
             if (res.length) {
-                setLobbyHost(res[0].host);  
+                setLobbyHost(res[0].host);
                 dispatch(setLobby(res[0]));
             } else {
                 console.log('lobby code not found');
@@ -84,16 +84,16 @@ function LobbyPage(props: LobbyProps) {
                 if (res.length && (lobby as any)?.updatedAt !== res[0]?.updatedAt) {
                     dispatch(setLobby(res[0]));
                 }
-                
+
                 if (lobby.restaurants.length > 0 && lobbyID === lobby.id) {
                     navigate("/selection");
                 }
             });
             }, 2000);
-        
+
         return () => clearInterval(interval);
     }, [lobby])
-    
+
     const handleLobbySettingsClick = () => {
         setShowFilters(true);
     }
@@ -127,12 +127,13 @@ function LobbyPage(props: LobbyProps) {
             });
         }
     }
-    
+
     return (
         <LayoutWithAppbar>
             <UserWidget></UserWidget>
 
             <div className='lobby-page'>
+                <div></div>
                 {showFilters && <LobbyFilters onFiltersSubmit={handleFiltersSubmit} lobbyID={lobbyID}></LobbyFilters>}
                 <div className='lobby-page-header'>
                     Go2Eat Lobby
@@ -165,7 +166,7 @@ function LobbyPage(props: LobbyProps) {
                     <button className='lobby-start-search-button' onClick={handleLobbyStart}>Start Search</button>
                     {isSearch && <CircularProgress sx={{marginTop: '13%'}}/>}
                 </div>}
-                {!isHost && 
+                {!isHost &&
                 <div className='lobby-page-waiting-message'>
                     <span>Waiting for Host to start searching...</span>
                     <br></br>
