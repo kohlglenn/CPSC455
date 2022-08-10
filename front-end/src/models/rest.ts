@@ -5,6 +5,8 @@ import userCookies from "./userCookies";
 //change stuff to use .env instead of hardcode address
 export const getUserAsync = async () => {
   const userid = userCookies.getUser();
+  if (!userid)
+    throw new Error("No user id");
   const url =
     `${process.env.REACT_APP_BACKEND || "http://localhost:5000"}` +
     "/users/" +
@@ -22,7 +24,6 @@ export const userLoginAsync = async (info: Object) => {
   const url =
     `${process.env.REACT_APP_BACKEND || "http://localhost:5000"}` +
     "/users/login";
-
   return fetch(url, {
     method: "POST",
     headers: {
@@ -109,8 +110,7 @@ export const addLobbyUsersAsync = async (user: Object) => {
 
 export const updateFiltersAsync = async (filters: Object) => {
   const response = await fetch(
-    `${
-      process.env.REACT_APP_BACKEND || "http://localhost:5000"
+    `${process.env.REACT_APP_BACKEND || "http://localhost:5000"
     }/lobby/updateLobby`,
     {
       method: "PUT",
@@ -139,8 +139,7 @@ export const setRestaurantsAsync = async (
     return;
   }
   const response = await fetch(
-    `${
-      process.env.REACT_APP_BACKEND || "http://localhost:5000"
+    `${process.env.REACT_APP_BACKEND || "http://localhost:5000"
     }/lobby/restaurants`,
     {
       method: "POST",

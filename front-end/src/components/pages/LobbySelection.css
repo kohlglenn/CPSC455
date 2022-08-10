@@ -23,7 +23,7 @@
 .lobby-code-input {
     border: 1px solid;
     border-radius: 12px;
-    width: 250px; 
+    width: max(80%, 225px);
     height: 30px;
     font-size: 18px;
     text-align: center;
@@ -64,7 +64,7 @@
     font-weight: 600;
     color: white;
     height: 40px;
-    width: 120px;
+    width: max(40%, 125px);
     margin: 10px;
 }
 
@@ -80,7 +80,7 @@
     font-weight: 600;
     color: white;
     height: 40px;
-    width: 70%;
+    width: max(70%, 225px);
 }
 
 .lobby-selection-create-group-button:hover {

@@ -21,7 +21,7 @@
     display:flex;
     flex-direction: column;
 }
-.modal-header { 
+.modal-header {
     height: 10%;
     display: flex;
     justify-content: center;
@@ -56,11 +56,15 @@
     height: 28%;
     font-size: 14px;
 }
+
 .other-filters {
     height: 72%;
     display: flex;
     flex-direction: column;
     font-size: 14px;
+}
+.other-filters-text {
+    margin-top: 10px;
 }
 
 .lobby-filters-submit-button {
