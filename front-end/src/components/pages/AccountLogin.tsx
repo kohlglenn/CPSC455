@@ -22,16 +22,17 @@ import { useDispatch, useSelector } from 'react-redux';
 import { setUser } from '../../actions';
 import { User } from '../../models';
 import { ReduxState } from '../../reducers';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { Navigate, useNavigate } from 'react-router';
 import UserWidget from '../widgets/UserWidget';
+import { Snackbar } from '@mui/material';
 
 function Copyright(props: any) {
   return (
     <Typography variant="body2" color="text.secondary" align="center" {...props}>
       {'Copyright © '}
-      <Link color="inherit" href="https://mui.com/">
-        Your Website
+      <Link color="inherit" href="https://github.com/kohlglenn/CPSC455/graphs/contributors">
+        Go2Eat Team
       </Link>{' '}
       {new Date().getFullYear()}
       {'.'}
@@ -42,6 +43,8 @@ function Copyright(props: any) {
 
 const theme = createTheme();
 export default function AccountLogin() {
+
+  const [toastMsg, setToastMsg] = useState('');
   const navigate = useNavigate();
   const user = useSelector((state: ReduxState) => state.user);
   if (user !== null) {
@@ -60,9 +63,15 @@ export default function AccountLogin() {
         return res.json().then((user: User) => {
           dispatch(setUser(user));
         });
+      } else{
+        setToastMsg(res.statusText);
       }
     });
   };
+
+  if (user !== null){
+    return <Navigate to = "/account" />;
+  }
   return (
     <LayoutWithAppbar>
     <UserWidget/>
@@ -113,12 +122,15 @@ export default function AccountLogin() {
             </Button>
             <Grid container>
               <Grid item xs>
+                {/*
                 <Link href="#" variant="body2">
                   Forgot password?
                 </Link>
+                deprecated, unless feature added later
+                */}
               </Grid>
               <Grid item>
-                <Link href="#" variant="body2">
+                <Link href="/createaccount" variant="body2">
                   {"Don't have an account? Sign Up"}
                 </Link>
               </Grid>
@@ -128,6 +140,12 @@ export default function AccountLogin() {
         <Copyright sx={{ mt: 8, mb: 4 }} />
       </Container>
     </ThemeProvider>
+    <Snackbar
+                    open={!!toastMsg}
+                    autoHideDuration={6000}
+                    onClose={() => {setToastMsg('')}}
+                    message={toastMsg}
+                />
     </LayoutWithAppbar>
   );
 }

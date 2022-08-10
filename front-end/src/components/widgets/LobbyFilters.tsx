@@ -9,7 +9,7 @@ export default function LobbyFilters(props: any) {
     const [starsValue, setStarsValue] = useState<number[]>([0,5]);
     const [distanceValue, setDistanceValue] = useState<number[]>([1,10]);
     const [reviewCountValue, setReviewCountValue] = useState<number[]>([5, 1000]);
-    
+
     useEffect(() => {
         getLobbyAsync(props.lobbyID).then((res) => {
             if (res.length) {
@@ -23,7 +23,7 @@ export default function LobbyFilters(props: any) {
                 console.log('lobby code not found');
             }
         });
-        
+
     }, [])
 
     const numberRestaurantsMarks = [{ label: 3, value: 3 }, { label: 6, value: 6 }, { label: 9, value: 9 }, { label: 12, value: 12 }, { label: 15, value: 15 }];
@@ -64,22 +64,22 @@ export default function LobbyFilters(props: any) {
                     <div className="number-restaurants-setting">
                         How many restaurants to pick from?
                         <div className="filter-block">
-                            <Slider 
-                                className="filter-slider" 
+                            <Slider
+                                className="filter-slider"
                                 defaultValue={9}
-                                value={numberRestaurantsValue} 
-                                min={3} 
-                                max={15} 
-                                step={3} 
-                                aria-label="Default" 
-                                valueLabelDisplay="auto" 
-                                marks={numberRestaurantsMarks} 
+                                value={numberRestaurantsValue}
+                                min={3}
+                                max={15}
+                                step={3}
+                                aria-label="Default"
+                                valueLabelDisplay="auto"
+                                marks={numberRestaurantsMarks}
                                 onChange={(e) => handleNumberRestaurantsChange(e)}
                             />
                         </div>
-                    </div>  
+                    </div>
                     <div className="other-filters">
-                        <div>Set Other Filters Below</div>
+                        <div className="other-filters-text">Set Other Filters Below</div>
                         <div className="filter-block">
                             <div className="filter-range">$</div>
                             <Slider
@@ -129,7 +129,7 @@ export default function LobbyFilters(props: any) {
                         </div>
                         <div className="filter-block">
                             <div className="filter-range">&lt;5 reviews</div>
-                            <Slider 
+                            <Slider
                                 className="filter-slider"
                                 min={5}
                                 max={1000}
@@ -141,7 +141,7 @@ export default function LobbyFilters(props: any) {
                             <div className="filter-range">1000+ reviews</div>
                         </div>
 
-                    </div>          
+                    </div>
                 </div>
                 <hr className='lobby-page-divider'></hr>
 
