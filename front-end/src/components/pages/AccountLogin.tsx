@@ -22,9 +22,10 @@ import { useDispatch, useSelector } from 'react-redux';
 import { setUser } from '../../actions';
 import { User } from '../../models';
 import { ReduxState } from '../../reducers';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { Navigate, useNavigate } from 'react-router';
 import UserWidget from '../widgets/UserWidget';
+import { Snackbar } from '@mui/material';
 
 function Copyright(props: any) {
   return (
@@ -42,6 +43,8 @@ function Copyright(props: any) {
 
 const theme = createTheme();
 export default function AccountLogin() {
+
+  const [toastMsg, setToastMsg] = useState('');
   const navigate = useNavigate();
   const user = useSelector((state: ReduxState) => state.user);
   if (user !== null) {
@@ -60,6 +63,8 @@ export default function AccountLogin() {
         return res.json().then((user: User) => {
           dispatch(setUser(user));
         });
+      } else{
+        setToastMsg(res.statusText);
       }
     });
   };
@@ -135,6 +140,12 @@ export default function AccountLogin() {
         <Copyright sx={{ mt: 8, mb: 4 }} />
       </Container>
     </ThemeProvider>
+    <Snackbar
+                    open={!!toastMsg}
+                    autoHideDuration={6000}
+                    onClose={() => {setToastMsg('')}}
+                    message={toastMsg}
+                />
     </LayoutWithAppbar>
   );
 }

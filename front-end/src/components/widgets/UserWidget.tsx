@@ -20,6 +20,7 @@ export default function UserWidget(props: any) {
                         dispatch(setUser(user));
                     });
                 }
+            }).catch((err)=>{
             });
         }
     }, [user]);
