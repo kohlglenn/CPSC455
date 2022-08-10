@@ -55,7 +55,7 @@ export default function MediaCard(props: any) {
         </div>
       </div>
       <button className='standard-button' onClick={() => window.open(`http://maps.google.com/?q=${name.split(" ").join("+")}`, "_blank")}>Get Directions</button>
-      <button className='standard-button' onClick={() => navigate("/lobbyselection")}>Back to Lobby Creation</button>
+      <button className='standard-button' onClick={() => navigate("/lobbyselection")}>Back to Lobby</button>
       <button className='standard-button' onClick={() => navigate("/")}>Back to Home</button>
     </div>
   );
