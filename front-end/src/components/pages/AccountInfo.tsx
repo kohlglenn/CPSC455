@@ -3,6 +3,8 @@ import { useNavigate } from 'react-router';
 import LayoutWithAppbar from '../layout/LayoutWithAppbar'
 import { ReduxState } from '../../reducers';
 import UserWidget from '../widgets/UserWidget';
+import userCookies from '../../models/userCookies';
+import { setUser } from '../../actions';
 
 import Link from '@mui/material/Link';
 import Typography from '@mui/material/Typography';
@@ -18,6 +20,14 @@ export default function ContactPage() {
 
   const handleLobbyStart = () => {
     navigate('/lobbyselection')
+  }
+  const handleViewStats = () => {
+    navigate('/stats')
+  }
+  const handleLogOut = () => {
+    userCookies.logout();
+    navigate('/');
+    dispatch(setUser(null));
   }
 
   if (user === null) {
@@ -39,8 +49,10 @@ export default function ContactPage() {
       <LayoutWithAppbar>
         <UserWidget/>
         <div className='container'>
-          <h2>Welcome Back, {user.name}</h2>
+          <h2 id='title-header'>Welcome Back, {user.name}</h2>
           <button className='go2eat-button' onClick={() => handleLobbyStart()}>Go Eat</button>
+          <button className='go2eat-button' onClick={() => handleViewStats()}>Statistics</button>
+          <button className='go2eat-button' id='logout' onClick={() => handleLogOut()}>Log Out</button>
         </div>
         {/*
         {user.name}<br />

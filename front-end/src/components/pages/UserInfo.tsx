@@ -2,11 +2,20 @@ import { useDispatch, useSelector } from 'react-redux';
 import LayoutWithAppbar from '../layout/LayoutWithAppbar'
 import { ReduxState } from '../../reducers';
 import { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router';
+
+import './UserInfo.css';
 
 export default function UserInfo() {
 
   const user = useSelector((state: ReduxState) => state.user);
   const [votes, setVotes] = useState<[any[], any[]]>([[], []]);
+
+  const navigate = useNavigate();
+  const handleBack = () => {
+    navigate('/account')
+  }
+
   function sortFunc(a: any[], b: any[]) {
     if (a[1] === b[1]) {
       return 0;
@@ -27,25 +36,30 @@ export default function UserInfo() {
   return (
     (user != null) ?
       <LayoutWithAppbar>
-        <div className='username'>
-          <h1>Welcome back, {user.name}!</h1>
-        </div>
-        <div className='restaurantHistory'>
-          {user.restaurantHistory && user.restaurantHistory.map(restaurant => {
-            return <h3>{restaurant['name']}</h3>
-          })}
-        </div>
-        <br/>
-        <div className='favTypes'>
-        {votes[0] && votes[0].slice(0, 5).map(vote => {
-            return <h6>{vote[0]}, {vote[1]}</h6>
-          })}
-        </div>
-        <div className='nonfavTypes'>
-        {votes[1] && votes[1].slice(0, 5).map(vote => {
+      <div>
+      <button className='userinfo-button' onClick={() => handleBack()}>Back to Profile</button>
+        <div id='statistics-flexbox'>
+          <div className='restaurantHistory'>
+            <p id='statsubHeader'>Your Recently<br/>Selected Restaurants:</p>
+              {user.restaurantHistory && user.restaurantHistory.map(restaurant => {
+              return <h3>{restaurant['name']}</h3>
+            })}
+          </div>
+          <br/>
+          <div className='favTypes'>
+            <p id='statsubHeader'>Your Favourite<br/>Restaurant Types:</p>
+            {votes[0] && votes[0].slice(0, 5).map(vote => {
             return <h3>{vote[0]}, {vote[1]}</h3>
-          })}
+            })}
+          </div>
+          <div className='nonfavTypes'>
+            <p id='statsubHeader'>Your Least Favourite<br/>Restaurant Types:</p>
+            {votes[1] && votes[1].slice(0, 5).map(vote => {
+              return <h3>{vote[0]}, {vote[1]}</h3>
+            })}
+          </div>
         </div>
+      </div>
       </LayoutWithAppbar>
       : <LayoutWithAppbar />
   );

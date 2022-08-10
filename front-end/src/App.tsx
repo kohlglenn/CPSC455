@@ -8,6 +8,7 @@ import LobbyPage from './components/pages/LobbyPage';
 import ContactPage from './components/pages/ContactPage';
 import AccountLogin from './components/pages/AccountLogin';
 import SimpleCreation from './components/pages/SimpleCreation';
+import AccountInfo from './components/pages/AccountInfo';
 import UserInfo from './components/pages/UserInfo';
 
 function App() {
@@ -18,7 +19,8 @@ function App() {
         {/* <Route path ="/about" caseSensitive={false} element={<About/>} /> */}
         <Route path ="/selection" caseSensitive={false} element={<Selection/>} />
         <Route path ="/contact" caseSensitive={false} element={<ContactPage/>} />
-        <Route path ="/account" caseSensitive={false} element={<UserInfo/>} />
+        <Route path ="/account" caseSensitive={false} element={<AccountInfo/>} />
+        <Route path ="/stats" caseSensitive={false} element={<UserInfo/>} />
         <Route path ="/login" caseSensitive={false} element={<AccountLogin/>} />
         <Route path ="/createaccount" caseSensitive={false} element={<SimpleCreation/>} />
         <Route path ="/lobbyselection" caseSensitive={false} element={<LobbySelection/>} />
