@@ -70,7 +70,7 @@ function Landing() {
           <div className="landing-content">
             <h2>Looking for a restaurant?</h2>
             <h3>We can help!</h3>
-            <h3>go2eat is a tool designed to help you choose a local <br /> restaurant for a meal, whether in a group or by yourself!</h3>
+            <h3>Go2Eat is a tool designed to help you choose a local <br /> restaurant for a meal, whether in a group or by yourself!</h3>
 
             <div className="landing-buttons">
               <button className="about-page-button" onClick={() => { toggleAbout() }}>See how it works!</button><br />
