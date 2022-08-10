@@ -2,7 +2,6 @@
     display: flex;
     flex-direction: column;
     text-align: center;
-    width: 40%;
     height: 80vh;
     margin: 0 auto;
     justify-content: center;
@@ -24,17 +23,11 @@
 .lobby-code-input {
     border: 1px solid;
     border-radius: 12px;
-    width: 80%; 
+    width: 250px; 
     height: 30px;
     font-size: 18px;
     text-align: center;
 }
-/* .lobby-selection-body {
-    height: 60vh;
-    background: rgb(190, 183, 183);
-    display: flex;
-    flex-direction: column;
-} */
 
 .lobby-selection-footer {
     display: flex;
@@ -71,7 +64,7 @@
     font-weight: 600;
     color: white;
     height: 40px;
-    width: 40%;
+    width: 120px;
     margin: 10px;
 }
 
