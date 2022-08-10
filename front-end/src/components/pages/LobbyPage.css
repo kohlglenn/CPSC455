@@ -3,7 +3,7 @@
     flex-direction: column;
     align-items: center;
     height: 80vh;
-    width: 400px;
+    width: max(400px, 50%);
 }
 .lobby-page-header {
     height: 20%;
