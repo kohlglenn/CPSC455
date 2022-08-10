@@ -1,3 +1,8 @@
+@font-face {
+  font-family: 'Logo Font';
+  src: URL('../../fonts/overmch.ttf') format('truetype');
+}
+
 .lobby-page {
     display: flex;
     flex-direction: column;
@@ -10,8 +15,9 @@
     justify-content: center;
     align-items: center;
     display: flex;
-    font-size: 25px;
+    font-size: max(25px, 4vw);
     font-weight: 600;
+    font-family: 'Logo Font';
 }
 
 .lobby-page-body {
@@ -85,7 +91,7 @@
     font-weight: 600;
     color: white;
     height: 40px;
-    width: 60%;
+    width: max(60%, 100px);
     margin-top: 13%;
     cursor: pointer;
 }

@@ -23,8 +23,12 @@ import { getUserAsync } from '../../models/rest';
 import { User } from '../../models';
 import logo from "../../horizontal_logo.png";
 
-const pages = ['Home'];
-const settings = ['Profile', 'Account', 'Logout'];
+const pages = ['Home', 'Sign Up', 'Log In'];
+const settings = ['Profile', 'Logout', 'Admin']
+/*
+old params, re-add as needed
+['Profile', 'Account', 'Dashboard', 'Logout', "Admin"];
+*/
 
 const ResponsiveAppBar = () => {
   const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(null);
@@ -48,6 +52,17 @@ const ResponsiveAppBar = () => {
         break;
     }
     setAnchorElNav(null);
+    switch(event.currentTarget.id) {
+      case "Home":
+        navigate('/')
+        break;
+      case "Sign Up":
+        navigate('/createaccount');
+        break;
+      case "Log In":
+        navigate('/login');
+        break;
+    }
   };
 
   const handleCloseUserMenu = (event: any) => {
@@ -57,6 +72,7 @@ const ResponsiveAppBar = () => {
         break;
       case "Logout":
         userCookies.logout();
+        navigate('/');
         dispatch(setUser(null));
         break;
     }
@@ -64,7 +80,7 @@ const ResponsiveAppBar = () => {
   };
 
   return (
-    <AppBar position="static">
+    <AppBar position="static" id="toplevel-appbar">
       <Container maxWidth="xl">
         <Toolbar disableGutters>
           <img src={logo} className="icon-md" />
@@ -110,6 +126,7 @@ const ResponsiveAppBar = () => {
             {pages.map((page) => (
               <Button
                 key={page}
+                id={page}
                 onClick={handleCloseNavMenu}
                 sx={{ my: 2, color: 'white', display: 'block' }}
               >
