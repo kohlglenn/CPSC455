@@ -62,7 +62,7 @@
   width: auto;
 }
 
-.about-page-button, .create-account-button {
+.about-page-button, .create-account-button, .eat-button {
   border-radius: 10px;
 	cursor: pointer;
 	background: #e7e7e7;
@@ -85,4 +85,7 @@ button:hover{
 
 .about-page-button{
   font-size: 1.5em;
+}
+.eat-button{
+  font-size: 3em;
 }

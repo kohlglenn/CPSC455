@@ -24,7 +24,7 @@ import { User } from '../../models';
 import logo from "../../horizontal_logo.png";
 
 const pages = ['Home', 'Sign Up', 'Log In'];
-const settings = ['Profile', 'Logout', 'Admin']
+const settings = ['Profile', 'Logout']
 /*
 old params, re-add as needed
 ['Profile', 'Account', 'Dashboard', 'Logout', "Admin"];

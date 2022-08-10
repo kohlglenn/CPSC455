@@ -41,22 +41,34 @@ export default function UserInfo() {
         <div id='statistics-flexbox'>
           <div className='restaurantHistory'>
             <p id='statsubHeader'>Your Recently<br/>Selected Restaurants:</p>
+            <table>
+              <tbody>
               {user.restaurantHistory && user.restaurantHistory.map(restaurant => {
-              return <h3>{restaurant['name']}</h3>
-            })}
+                return <tr className='historyElement'><td><h3>{restaurant['name']}</h3></td></tr>
+              })}
+              </tbody>
+            </table>
           </div>
           <br/>
           <div className='favTypes'>
             <p id='statsubHeader'>Your Favourite<br/>Restaurant Types:</p>
-            {votes[0] && votes[0].slice(0, 5).map(vote => {
-            return <h3>{vote[0]}, {vote[1]}</h3>
-            })}
+            <table>
+              <tbody>
+              {votes[0] && votes[0].slice(0, 5).map(vote => {
+                return <tr className='likeElement'><td><h3>{vote[0]}</h3></td><td><h3>{vote[1]}</h3></td></tr>
+              })}
+              </tbody>
+            </table>
           </div>
           <div className='nonfavTypes'>
             <p id='statsubHeader'>Your Least Favourite<br/>Restaurant Types:</p>
-            {votes[1] && votes[1].slice(0, 5).map(vote => {
-              return <h3>{vote[0]}, {vote[1]}</h3>
-            })}
+            <table>
+            <tbody>
+              {votes[1] && votes[1].slice(0, 5).map(vote => {
+                return <tr className='dislikeElement'><td><h3>{vote[0]}</h3></td><td><h3>{vote[1]}</h3></td></tr>
+              })}
+              </tbody>
+            </table>
           </div>
         </div>
       </div>
