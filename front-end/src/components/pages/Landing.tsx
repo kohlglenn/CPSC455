@@ -64,26 +64,29 @@ function Landing() {
     navigate('/lobbyselection');
   }
   if (!user) {
-    return (
-      <LayoutWithAppbar>
-        <div id='toplevel'>
-          <p className="landing-title">Welcome to Go2Eat</p>
-          <div className="landing-page">
-            <div className="landing-content">
-              <h2>Looking for a restaurant?</h2>
-              <h3>We can help!</h3>
-              <h3>go2eat is a tool designed to help you choose a local <br /> restaurant for a meal, whether in a group or by yourself!</h3>
 
-              <div className="landing-buttons">
-                <button className="about-page-button" onClick={() => { toggleAbout() }}>See how it works!</button><br />
-                <button className="create-account-button" onClick={() => { handleCreateClick() }}>Create Account</button>
-              </div>
+  return (
+    <LayoutWithAppbar>
+      <UserWidget/>
+      <div id='toplevel'>
+        <p className="landing-title">Welcome to Go2Eat</p>
+        <div className="landing-page">
+          <div className="landing-content">
+            <h2>Looking for a restaurant?</h2>
+            <h3>We can help!</h3>
+            <h3>Go2Eat is a tool designed to help you choose a local <br /> restaurant for a meal, whether in a group or by yourself!</h3>
+
+            <div className="landing-buttons">
+              <button className="about-page-button" onClick={() => { toggleAbout() }}>See how it works!</button><br />
+              <button className="create-account-button" onClick={() => { handleCreateClick() }}>Create Account</button>
+
             </div>
             <div className="image-container">
               <img className="landing-image" src={require("./../../logo.png")} />
             </div>
             <AboutPage show={isAboutVisible} closer={toggleAbout} />
           </div>
+        </div>
         </div>
 
       </LayoutWithAppbar>

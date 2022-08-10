@@ -1,18 +1,58 @@
-.stats-page {
-    display: flex;
-    flex-direction: column;
-    text-align: center;
-    width: 40%;
-    height: 80vh;
-    margin: 0 auto;
-    margin-top:50px;
-    justify-content: center;
+
+
+@font-face {
+  font-family: 'Logo Font';
+  src: URL('../../fonts/overmch.ttf') format('truetype');
 }
 
-.username-header {
-    margin: 10px;
-    font-size: 25px;
-    font-weight: 600;
+#statHeader {
+  width: 100%;
+  font-family: 'Logo Font';
+  font-size: max(20px, 3vw);
+  display: block;
+  text-align: center;
+  margin-top: 10px;
+}
+
+#statsubHeader {
+  font-size: max(2vw, 15px);
+  font-weight: 900;
+  flex-wrap: wrap;
+  margin-top: 0px;
+}
+
+#userinfo-button-holder {
+  margin-top: 0px;
+}
+
+#statistics-flexbox {
+  display: flex;
+}
+
+.userinfo-button {
+  border: none;
+  background-color: #719BCD;
+  border-radius: 50px;
+  font-size: max(1.5vw, 24px);
+  font-weight: 600;
+  color: white;
+  height: 40px;
+  width: max(15%, 200px);
+  margin: 10px 10px;
+  margin-top: 12px;
+  display:inline-block;
+  left: min(5%, 20px);
+}
+
+.username, .restaurantHistory, .favTypes, .nonfavTypes {
+  font-size: max(1vw, 8px);
+  border: 5px dashed #CF5858;
+  padding: max(1%, 5px);
+  justify-content: center;
+  flex-wrap: wrap;
+  margin: 10px;
+  margin-top: 0px;
+  min-width: 80px;
 }
 
 table{

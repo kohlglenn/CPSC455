@@ -8,7 +8,7 @@
     flex-direction: column;
     align-items: center;
     height: 80vh;
-    width: 50%;
+    width: max(400px, 50%);
 }
 .lobby-page-header {
     height: 20%;
@@ -83,7 +83,20 @@
     margin-top: 40%;
 }
 
-.lobby-settings-button, .lobby-filters-button, .lobby-add-members-button, .lobby-start-search-button {
+.lobby-start-search-button {
+    border: none;
+    background-color: #719BCD;
+    border-radius: 50px;
+    font-size: 20px;
+    font-weight: 600;
+    color: white;
+    height: 40px;
+    width: 150px;
+    margin-top: 13%;
+    cursor: pointer;
+}
+
+.lobby-settings-button {
     border: none;
     background-color: #719BCD;
     border-radius: 50px;

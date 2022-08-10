@@ -32,8 +32,13 @@ function LobbySelection() {
     const handleJoinLobbyClicked = () => {
         getLobbyAsync(lobbyCode).then((res) => {
             if (res.length) {
-                navigate('/lobbypage', { state: { id: lobbyCode, isHost: false } });
-                addLobbyUsersAsync({ id: lobbyCode, user: user });
+                if (!(res[0].participants.filter((participant: any) => {
+                    return user._id == participant._id;
+                }).length > 0)) {
+                    addLobbyUsersAsync({ id: lobbyCode, user: user });
+                }
+                navigate('/lobbypage', { state: { id: lobbyCode, isHost: res[0].host._id == user._id } });
+
             } else {
                 setShowError(true);
             }
