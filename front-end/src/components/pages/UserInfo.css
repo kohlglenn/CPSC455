@@ -1,0 +1,21 @@
+.stats-page {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    width: 40%;
+    height: 80vh;
+    margin: 0 auto;
+    margin-top:50px;
+    justify-content: center;
+}
+
+.username-header {
+    margin: 10px;
+    font-size: 25px;
+    font-weight: 600;
+}
+
+table{
+    margin-left:auto;
+    margin-right:auto;
+}

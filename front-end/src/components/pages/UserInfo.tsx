@@ -3,6 +3,8 @@ import LayoutWithAppbar from '../layout/LayoutWithAppbar'
 import { ReduxState } from '../../reducers';
 import { useEffect, useState } from 'react';
 
+import './UserInfo.css'
+
 export default function UserInfo() {
 
   const user = useSelector((state: ReduxState) => state.user);
@@ -27,24 +29,34 @@ export default function UserInfo() {
   return (
     (user != null) ?
       <LayoutWithAppbar>
-        <div className='username'>
-          <h1>Welcome back, {user.name}!</h1>
-        </div>
-        <div className='restaurantHistory'>
-          {user.restaurantHistory && user.restaurantHistory.map(restaurant => {
-            return <h3>{restaurant['name']}</h3>
-          })}
-        </div>
-        <br/>
-        <div className='favTypes'>
-        {votes[0] && votes[0].slice(0, 5).map(vote => {
-            return <h6>{vote[0]}, {vote[1]}</h6>
-          })}
-        </div>
-        <div className='nonfavTypes'>
-        {votes[1] && votes[1].slice(0, 5).map(vote => {
-            return <h3>{vote[0]}, {vote[1]}</h3>
-          })}
+        <div className='stats-page'>
+          <div className='username'>
+            <h1>Statistics for {user.name}!</h1>
+          </div>
+          <div className='restaurantHistory'>
+            <h2 id='historyHeader'>Your Past Restaurants</h2>
+            <table>
+              {user.restaurantHistory && user.restaurantHistory.map(restaurant => {
+                return <tr className='historyElement'><td>{restaurant['name']}</td></tr>
+              })}
+            </table>
+          </div>
+          <div className='likeTypes'>
+            <h2 id='likeHeader'>Your Top Liked Categories</h2>
+            <table>
+              {votes[0] && votes[0].slice(0, 5).map(vote => {
+                return <tr className='likeElement'><td>{vote[0]}</td> <td>{vote[1]}</td></tr>
+              })}
+            </table>
+          </div>
+          <div className='dislikeTypes'>
+            <h2 id='dislikeHeader'>Your Top Disliked Categories</h2>
+            <table>
+              {votes[1] && votes[1].slice(0, 5).map(vote => {
+                return <tr className='dislikeElement'><td>{vote[0]}</td> <td>{vote[1]}</td></tr>
+              })}
+            </table>
+          </div>
         </div>
       </LayoutWithAppbar>
       : <LayoutWithAppbar />
