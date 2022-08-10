@@ -80,7 +80,6 @@ export const stripUser = (user: User)=>{
     restaurantHistory: user.restaurantHistory,
     token: user.token,
   }
-  console.log(newUser.upvotes);
   return newUser;
 }
 

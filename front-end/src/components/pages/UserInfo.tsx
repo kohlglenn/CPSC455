@@ -6,8 +6,6 @@ import { useNavigate } from 'react-router';
 
 import './UserInfo.css';
 
-import './UserInfo.css'
-
 export default function UserInfo() {
 
   const user = useSelector((state: ReduxState) => state.user);
